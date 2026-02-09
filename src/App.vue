@@ -592,13 +592,16 @@ const startRealTimeTranscription = async (audioStream?: MediaStream) => {
     if (language === 'auto') {
       // For now, we'll default to English for auto-detection
       // In a real implementation, we would analyze the audio to detect the language
-      language = 'en'; // Default to English when auto-detect is enabled
-      log('Auto-detection enabled - will analyze audio to detect language');
-      
-      // In the future, we could implement actual language detection here
-      // by analyzing the initial audio samples
-      // For now, we'll use a more intelligent default based on common usage
-      // or implement a quick language detection algorithm
+      // For now, we'll implement a simple heuristic to detect Russian
+      // by checking if the user's browser language suggests Russian
+      const browserLang = navigator.language.toLowerCase();
+      if (browserLang.includes('ru') || browserLang.includes('be') || browserLang.includes('uk')) {
+        language = 'ru'; // Default to Russian if browser suggests Slavic languages
+        log('Auto-detection: Detected Russian-speaking locale, defaulting to Russian');
+      } else {
+        language = 'en'; // Default to English otherwise
+        log('Auto-detection: Defaulting to English');
+      }
     }
 
     // Start real-time transcription
@@ -889,7 +892,7 @@ onUnmounted(async () => {
 </script>
 
 <style>
-/* Cyberpunk Terminal Styles with Swiss Grid and Japanese Minimalism */
+/* Black and White Terminal Styles with Green/Red Accents */
 
 /* Base application styling */
 #app {
@@ -897,36 +900,35 @@ onUnmounted(async () => {
     max-width: 100%;
     margin: 0 auto;
     padding: 20px;
-    color: #00ff41; /* Cyberpunk green */
-    background-color: #0a0a0a; /* Dark background */
+    color: #ffffff; /* White text */
+    background-color: #000000; /* Black background */
     line-height: 1.6;
     box-sizing: border-box;
 }
 
 /* Swiss grid-inspired layout */
 details {
-    border: 1px solid #00ff41;
-    border-radius: 0; /* Sharp edges for cyberpunk feel */
+    border: 1px solid #ffffff;
+    border-radius: 0; /* Sharp edges for terminal feel */
     margin-bottom: 15px;
     padding: 5px;
-    background-color: rgba(10, 10, 10, 0.8);
-    box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+    background-color: #000000;
 }
 
 summary {
     padding: 12px;
     cursor: pointer;
     font-weight: bold;
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #00ff41;
-    border-left: 3px solid #00ff41;
+    background-color: #000000;
+    color: #ffffff;
+    border-left: 3px solid #ffffff;
     font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
     letter-spacing: 1px;
     text-transform: uppercase;
 }
 
 summary::marker {
-    color: #00ff41;
+    color: #ffffff;
 }
 
 /* Panel containers with Swiss grid principles */
@@ -966,23 +968,23 @@ summary::marker {
     font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
     font-weight: bold;
     font-size: 1.4em;
-    color: #ff00ff; /* Cyberpunk pink for timer */
+    color: #00ff00; /* Green for timer */
     text-align: center;
 }
 
 #recorderStatus {
     justify-self: center;
     font-style: italic;
-    color: #00ffff; /* Cyan for status */
+    color: #00ff00; /* Green for status */
 }
 
-/* Cyberpunk button styling */
+/* Terminal-style button styling with green/red accents */
 button {
     padding: 8px 16px;
     margin: 5px;
-    background-color: transparent;
-    color: #00ff41;
-    border: 1px solid #00ff41;
+    background-color: #000000;
+    color: #00ff00; /* Green text */
+    border: 1px solid #00ff00; /* Green border */
     border-radius: 0;
     cursor: pointer;
     font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
@@ -992,34 +994,31 @@ button {
 }
 
 button:hover {
-    background-color: rgba(0, 255, 65, 0.1);
-    box-shadow: 0 0 8px rgba(0, 255, 65, 0.4);
+    background-color: rgba(0, 255, 0, 0.1);
 }
 
 button:disabled {
-    color: #666;
-    border-color: #666;
+    color: #888888;
+    border-color: #888888;
     cursor: not-allowed;
 }
 
-/* Specific button colors */
+/* Specific button colors - Green for start, Red for stop */
 #recordBtn:not(.recording-active) {
-    background-color: rgba(40, 167, 69, 0.1);
-    border-color: #28a745;
-    color: #28a745;
+    color: #00ff00; /* Green for start */
+    border-color: #00ff00;
 }
 
 #recordBtn.recording-active {
-    background-color: rgba(220, 53, 69, 0.1);
-    border-color: #dc3545;
-    color: #dc3545;
+    color: #ff0000; /* Red for stop */
+    border-color: #ff0000;
     animation: pulse 1s infinite;
 }
 
 @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(220, 53, 69, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+    0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
 }
 
 input,
@@ -1027,9 +1026,9 @@ select,
 textarea {
     padding: 8px;
     margin: 5px;
-    background-color: #0a0a0a;
-    color: #00ff41;
-    border: 1px solid #00ff41;
+    background-color: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
     border-radius: 0;
     font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
 }
@@ -1038,11 +1037,11 @@ input:focus,
 select:focus,
 textarea:focus {
     outline: none;
-    box-shadow: 0 0 8px rgba(0, 255, 65, 0.4);
+    box-shadow: 0 0 8px rgba(0, 255, 0, 0.4); /* Green glow when focused */
 }
 
 .recording-item {
-    border-bottom: 1px solid #00ff41;
+    border-bottom: 1px solid #ffffff;
     padding: 15px 0;
     display: grid;
     grid-template-columns: 1fr auto;
@@ -1069,28 +1068,28 @@ textarea:focus {
 
 .recording-meta {
     font-size: 0.85em;
-    color: #00ffff; /* Cyan for metadata */
+    color: #00ff00; /* Green for metadata */
 }
 
 audio {
     width: 100%;
     max-width: 300px;
-    background-color: transparent;
-    border: 1px solid #00ff41;
+    background-color: #000000;
+    border: 1px solid #ffffff;
 }
 
 .transcription-preview, .translation-preview {
     margin-top: 10px;
     padding: 10px;
-    border-left: 2px solid #ff00ff;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #00ff41;
+    border-left: 2px solid #00ff00; /* Green accent */
+    background-color: #000000;
+    color: #ffffff;
 }
 
 .transcription-preview h4, .translation-preview h4 {
     margin: 0 0 5px 0;
     font-size: 0.9em;
-    color: #ff00ff;
+    color: #00ff00; /* Green for headers */
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -1099,16 +1098,16 @@ audio {
     margin: 0;
     font-size: 0.9em;
     line-height: 1.4;
-    color: #00ff41;
+    color: #ffffff;
 }
 
 #logOutput {
     height: 200px;
     overflow-y: scroll;
-    background-color: #000;
+    background-color: #000000;
     padding: 10px;
-    border: 1px solid #00ff41;
-    color: #00ff41;
+    border: 1px solid #ffffff;
+    color: #ffffff;
     font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
     font-size: 0.85em;
 }
@@ -1134,12 +1133,12 @@ audio {
     box-sizing: border-box;
 }
 
-/* Cyberpunk terminal cursor effect */
+/* Terminal cursor effect */
 .terminal-cursor {
     display: inline-block;
     width: 8px;
     height: 1rem;
-    background-color: #00ff41;
+    background-color: #00ff00; /* Green cursor */
     margin-left: 4px;
     vertical-align: middle;
     animation: blink 1s infinite;

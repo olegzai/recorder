@@ -12,7 +12,8 @@ Cyberpunk terminal-style audio recorder with Swiss grid design principles and Ja
 
 ## Design Philosophy
 
-- **Cyberpunk Terminal Aesthetic**: Futuristic terminal-style interface reminiscent of spaceship control panels
+- **Black and White Terminal Aesthetic**: High-contrast monochromatic interface with terminal-style design
+- **Green/Red Accent Colors**: Strategic use of green for success/positive actions and red for warnings/errors
 - **Swiss Grid Principles**: Precise grid layout with consistent spacing and alignment
 - **Japanese Minimalism**: Absolute minimalism with essential elements only
 - **Responsive Design**: Fully adaptive interface that works on all screen sizes
