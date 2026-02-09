@@ -87,8 +87,11 @@ Recorder is a lightweight, standalone sound recording solution that uses modern 
 - **Cross-Platform Compatibility**: Works in all modern browsers supporting Web Audio (desktop and mobile)
 - **Lightweight**: Minimal code footprint without external dependencies
 - **Export Options**: Save recordings in multiple formats (WAV, MP3, OGG, WebM)
-- **Transcription**: Ability to convert speech to text in Russian and English
+- **Transcription**: Ability to convert speech to text in Russian, English, and Ukrainian
 - **Translation**: Function to translate transcribed text into different languages
+- **Comprehensive Logging**: All application processes are logged for diagnostics
+- **Typedoc Documentation**: API documentation generated with Typedoc
+- **Real-time Transcription**: Live speech-to-text conversion with support for multiple languages
 - **Voiceover**: Ability to voice over translated text
 - **Silence Detection**: Automatic silence detection during recording
 - **Automatic Cleanup**: Configure retention period for recordings and ability to fully clear
@@ -163,7 +166,7 @@ The project is built using a modular architecture where each component is presen
 - **TranscriptionModule**: Converts speech to text using Web Speech API
 - **TranslationModule**: Translates text between languages using external APIs
 - **VoiceoverModule**: Generates speech from text using TTS engines
-- **StorageModule**: Handles local storage (localStorage, IndexedDB)
+- **StorageModule**: Handles local storage using both localStorage and IndexedDB. The module has been enhanced to prevent localStorage quota exceeded errors by storing metadata separately for each recording, allowing for better scalability with multiple recordings.
 - **UILayoutModule**: Manages UI components and accordion interface
 - **SettingsModule**: Manages application configuration and preferences
 - **LoggingModule**: Handles application logging and diagnostics
@@ -178,7 +181,7 @@ The application follows a unidirectional data flow:
 1. **Input**: Audio captured from microphone via Web Audio API
 2. **Processing**: Real-time audio processing and filtering
 3. **Encoding**: Conversion to desired output format
-4. **Storage**: Saving to client-side storage (Blob)
+4. **Storage**: Saving to client-side storage (Blob) using localStorage for metadata and IndexedDB for audio data to prevent quota exceeded errors
 5. **Export**: Download/export functionality
 6. **Analysis**: Transcription and translation services
 7. **Output**: Playback and voiceover capabilities
@@ -225,7 +228,7 @@ Main interface accordions:
 </details>
 ```
 
-Recordings are stored in localStorage and IndexedDB to ensure maximum possible long-term storage between sessions. History is sorted from newest to oldest recordings.
+Recordings are stored using a hybrid approach: audio data is stored in IndexedDB for large files, while metadata is stored in localStorage using separate entries per recording to prevent quota exceeded errors. This ensures maximum possible long-term storage between sessions. History is sorted from newest to oldest recordings.
 
 ### 3. Settings
 
@@ -500,7 +503,7 @@ if (isPluginEnabled('translation')) {
 - Explicit user permission required for microphone access
 - Recording stops when user leaves the page
 - Silence detection support for recording optimization
-- Local storage of confidential recordings
+- Secure local storage of confidential recordings using IndexedDB for audio data and localStorage for metadata
 
 ## Limitations
 
@@ -600,6 +603,11 @@ If you have problems with the application:
    - Check available space on device
    - Update browser to the latest version
    - Reduce sample rate or bitrate settings
+
+4. **Storage quota exceeded errors**:
+   - The application now uses a hybrid approach with IndexedDB for audio data and localStorage for metadata to prevent quota exceeded errors
+   - If you encounter storage issues, try clearing old recordings through the automatic cleanup settings
+   - The application manages storage efficiently to accommodate multiple recordings
 
 ### Browser-Specific Issues
 
@@ -837,7 +845,7 @@ This section addresses common questions about the Recorder application. If your 
 
 16. **What precautions are taken when working with confidential recordings?**
 
-    All recordings are stored locally on your device using secure storage mechanisms (localStorage and IndexedDB). No audio data is transmitted to external servers unless you specifically use online transcription or translation services.
+    All recordings are stored locally on your device using secure storage mechanisms (IndexedDB for audio data and localStorage for metadata). No audio data is transmitted to external servers unless you specifically use online transcription or translation services.
 
 ### Usability
 

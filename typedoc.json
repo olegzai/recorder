@@ -1,0 +1,17 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "src/types.ts",
+    "src/modules/AudioModule.ts",
+    "src/modules/StorageModule.ts"
+  ],
+  "excludeNotDocumented": false,
+  "excludeInternal": true,
+  "excludePrivate": true,
+  "out": "docs/api",
+  "name": "Recorder Application",
+  "includeVersion": true,
+  "readme": "README.md",
+  "tsconfig": "tsconfig.json",
+  "skipErrorChecking": true
+}

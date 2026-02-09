@@ -1,0 +1,774 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="./"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Recorder Application - v0.0.1</title><meta name="description" content="Documentation for Recorder Application"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/icons.js" id="tsd-icons-script"></script><script async src="assets/search.js" id="tsd-search-script"></script><script async src="assets/navigation.js" id="tsd-nav-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="index.html" class="title">Recorder Application - v0.0.1</a><div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><h1>Recorder Application - v0.0.1</h1></div><div class="tsd-panel tsd-typography"><h1 id="recorder" class="tsd-anchor-link">Recorder<a href="#recorder" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h1>
+<p><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
+<a href="VERSIONS.md"><img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Build Status"></a>
+<a href="README.md"><img src="https://img.shields.io/badge/platform-web-lightgrey.svg" alt="Platform"></a>
+<a href="https://www.typescriptlang.org/"><img src="https://img.shields.io/badge/Made%20with-TypeScript-007ACC.svg" alt="TypeScript"></a>
+<a href="https://developer.mozilla.org/en-US/docs/Web/API"><img src="https://img.shields.io/badge/WebAPI-Compatible-FF69B4.svg" alt="Web API"></a></p>
+<p>CSS-free, pure HTML+TypeScript+JavaScript browser-based audio recorder without a server, which works entirely in the browser without any backend dependencies. Includes speech transcription and translation features.</p>
+<h2 id="table-of-contents" class="tsd-anchor-link">Table of Contents<a href="#table-of-contents" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#tech-stack">Tech Stack</a></li>
+<li><a href="#architecture">Architecture</a>
+<ul>
+<li><a href="#project-structure">Project Structure</a></li>
+<li><a href="#module-architecture">Module Architecture</a></li>
+<li><a href="#data-flow">Data Flow</a></li>
+<li><a href="#plugin-system-architecture">Plugin System Architecture</a></li>
+</ul>
+</li>
+<li><a href="#interface">Interface</a>
+<ul>
+<li><a href="#1-recorder">1. Recorder</a></li>
+<li><a href="#2-history">2. History</a></li>
+<li><a href="#3-settings">3. Settings</a></li>
+<li><a href="#4-plugins">4. Plugins</a></li>
+<li><a href="#5-help">5. Help</a></li>
+<li><a href="#6-log">6. Log</a></li>
+</ul>
+</li>
+<li><a href="#getting-started">Getting Started</a>
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#development">Development</a></li>
+<li><a href="#building-the-project">Building the Project</a></li>
+<li><a href="#usage">Usage</a></li>
+</ul>
+</li>
+<li><a href="#api-reference">API Reference</a>
+<ul>
+<li><a href="#recording-functions">Recording Functions</a></li>
+<li><a href="#transcription-and-translation-functions">Transcription and Translation Functions</a></li>
+<li><a href="#plugin-management-functions">Plugin Management Functions</a></li>
+<li><a href="#configuration-parameters">Configuration Parameters</a></li>
+<li><a href="#usage-examples">Usage Examples</a></li>
+</ul>
+</li>
+<li><a href="#browser-support">Browser Support</a>
+<ul>
+<li><a href="#desktop-browsers">Desktop Browsers</a></li>
+<li><a href="#mobile-browsers">Mobile Browsers</a></li>
+<li><a href="#feature-support-matrix">Feature Support Matrix</a></li>
+</ul>
+</li>
+<li><a href="#security-and-privacy">Security and Privacy</a></li>
+<li><a href="#limitations">Limitations</a></li>
+<li><a href="#configuration">Configuration</a>
+<ul>
+<li><a href="#configuration-options-explained">Configuration Options Explained</a></li>
+</ul>
+</li>
+<li><a href="#performance">Performance</a>
+<ul>
+<li><a href="#performance-metrics">Performance Metrics</a></li>
+<li><a href="#performance-optimization-tips">Performance Optimization Tips</a></li>
+</ul>
+</li>
+<li><a href="#troubleshooting">Troubleshooting</a>
+<ul>
+<li><a href="#common-issues">Common Issues</a></li>
+<li><a href="#browser-specific-issues">Browser-Specific Issues</a></li>
+<li><a href="#advanced-troubleshooting">Advanced Troubleshooting</a></li>
+</ul>
+</li>
+<li><a href="#development-roadmap">Development Roadmap</a></li>
+<li><a href="#changelog">Changelog</a></li>
+<li><a href="#testing">Testing</a></li>
+<li><a href="#contributing">Contributing</a>
+<ul>
+<li><a href="#how-to-contribute">How to Contribute</a></li>
+<li><a href="#reporting-bugs">Reporting Bugs</a></li>
+<li><a href="#suggesting-enhancements">Suggesting Enhancements</a></li>
+<li><a href="#code-style">Code Style</a></li>
+</ul>
+</li>
+<li><a href="#license">License</a></li>
+<li><a href="#support">Support</a></li>
+<li><a href="#authors">Authors</a></li>
+<li><a href="#credits">Credits</a></li>
+<li><a href="#frequently-asked-questions-faq">Frequently Asked Questions (FAQ)</a>
+<ul>
+<li><a href="#how-to-use-this-faq">How to Use This FAQ</a></li>
+<li><a href="#general-questions">General Questions</a></li>
+<li><a href="#functionality">Functionality</a></li>
+<li><a href="#user-interface">User Interface</a></li>
+<li><a href="#technical-questions">Technical Questions</a></li>
+<li><a href="#security-and-privacy">Security and Privacy</a></li>
+<li><a href="#usability">Usability</a></li>
+<li><a href="#architecture-1">Architecture</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="overview" class="tsd-anchor-link">Overview<a href="#overview" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Recorder is a lightweight, standalone sound recording solution that uses modern browser APIs to capture, process, and store audio directly in the user's browser. No backend infrastructure is required - everything happens on the client side for maximum privacy and portability. The application also provides speech-to-text transcription capabilities (in Russian and English) and translation into various languages with subsequent voiceover.</p>
+<h2 id="features" class="tsd-anchor-link">Features<a href="#features" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<ul>
+<li><strong>Serverless Architecture</strong>: Works entirely in the browser without backend dependencies</li>
+<li><strong>Privacy-Focused</strong>: Audio recordings never leave the user's device</li>
+<li><strong>No CSS</strong>: Completely devoid of CSS and any styling, only clean HTML structure</li>
+<li><strong>Modern Web APIs</strong>: Uses MediaRecorder API and Web Audio API for high-quality recording</li>
+<li><strong>Cross-Platform Compatibility</strong>: Works in all modern browsers supporting Web Audio (desktop and mobile)</li>
+<li><strong>Lightweight</strong>: Minimal code footprint without external dependencies</li>
+<li><strong>Export Options</strong>: Save recordings in multiple formats (WAV, MP3, OGG, WebM)</li>
+<li><strong>Transcription</strong>: Ability to convert speech to text in Russian, English, and Ukrainian</li>
+<li><strong>Translation</strong>: Function to translate transcribed text into different languages</li>
+<li><strong>Comprehensive Logging</strong>: All application processes are logged for diagnostics</li>
+<li><strong>Typedoc Documentation</strong>: API documentation generated with Typedoc</li>
+<li><strong>Real-time Transcription</strong>: Live speech-to-text conversion with support for multiple languages</li>
+<li><strong>Voiceover</strong>: Ability to voice over translated text</li>
+<li><strong>Silence Detection</strong>: Automatic silence detection during recording</li>
+<li><strong>Automatic Cleanup</strong>: Configure retention period for recordings and ability to fully clear</li>
+<li><strong>Future CSS Support</strong>: In settings, ability to enable/disable CSS styling</li>
+<li><strong>Modular Architecture</strong>: Fully modular project, code and files developed as independent modules</li>
+<li><strong>Single Build</strong>: Compilation creates one final HTML file including all code</li>
+<li><strong>Plugin System</strong>: All modules (recording, transcription, translation, history, settings, etc.) can be enabled/disabled as plugins</li>
+</ul>
+<h2 id="tech-stack" class="tsd-anchor-link">Tech Stack<a href="#tech-stack" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<ul>
+<li><strong>HTML5</strong>: Semantic markup for recording interface</li>
+<li><strong>TypeScript</strong>: Type-safe application logic and error handling</li>
+<li><strong>JavaScript</strong>: Real-time execution and DOM manipulation</li>
+<li><strong>Web Audio API</strong>: Audio processing and manipulation</li>
+<li><strong>MediaRecorder API</strong>: Audio capture and encoding</li>
+<li><strong>Blob API</strong>: File creation and download functionality</li>
+<li><strong>Web Speech API</strong>: For speech-to-text transcription</li>
+<li><strong>Translation API Integrations</strong>: For text translation and voiceover</li>
+<li><strong>Module System</strong>: For organizing code into independent components</li>
+</ul>
+<h2 id="architecture" class="tsd-anchor-link">Architecture<a href="#architecture" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>The application follows a modular architecture with clear separation of concerns. Audio data flows from the microphone through Web Audio API and MediaRecorder to client-side storage, with optional processing through transcription and translation services.</p>
+<h3 id="project-structure" class="tsd-anchor-link">Project Structure<a href="#project-structure" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<pre><code><span class="hl-0">recorder</span><span class="hl-1">/</span><br/><span class="hl-1">├── </span><span class="hl-0">src</span><span class="hl-1">/</span><br/><span class="hl-1">│   ├── </span><span class="hl-0">modules</span><span class="hl-1">/</span><br/><span class="hl-1">│   │   ├── </span><span class="hl-0">audio</span><span class="hl-1">-</span><span class="hl-0">input</span><span class="hl-1">/</span><br/><span class="hl-1">│   │   ├── </span><span class="hl-0">recording</span><span class="hl-1">-</span><span class="hl-0">engine</span><span class="hl-1">/</span><br/><span class="hl-1">│   │   ├── </span><span class="hl-0">audio</span><span class="hl-1">-</span><span class="hl-0">processing</span><span class="hl-1">/</span><br/><span class="hl-1">│   │   ├── </span><span class="hl-0">encoding</span><span class="hl-1">/</span><br/><span class="hl-1">│   │   ├── </span><span class="hl-0">file</span><span class="hl-1">-</span><span class="hl-0">manager</span><span class="hl-1">/</span><br/><span class="hl-1">│   │   ├── </span><span class="hl-0">transcription</span><span class="hl-1">/</span><br/><span class="hl-1">│   │   ├── </span><span class="hl-0">translation</span><span class="hl-1">/</span><br/><span class="hl-1">│   │   ├── </span><span class="hl-0">voiceover</span><span class="hl-1">/</span><br/><span class="hl-1">│   │   ├── </span><span class="hl-0">storage</span><span class="hl-1">/</span><br/><span class="hl-1">│   │   ├── </span><span class="hl-0">ui</span><span class="hl-1">-</span><span class="hl-0">layout</span><span class="hl-1">/</span><br/><span class="hl-1">│   │   ├── </span><span class="hl-0">settings</span><span class="hl-1">/</span><br/><span class="hl-1">│   │   ├── </span><span class="hl-0">logging</span><span class="hl-1">/</span><br/><span class="hl-1">│   │   └── </span><span class="hl-0">plugin</span><span class="hl-1">-</span><span class="hl-0">manager</span><span class="hl-1">/</span><br/><span class="hl-1">│   ├── </span><span class="hl-0">interfaces</span><span class="hl-1">/</span><br/><span class="hl-1">│   ├── </span><span class="hl-0">utils</span><span class="hl-1">/</span><br/><span class="hl-1">│   └── </span><span class="hl-0">types</span><span class="hl-1">/</span><br/><span class="hl-1">├── </span><span class="hl-0">dist</span><span class="hl-1">/</span><br/><span class="hl-1">├── </span><span class="hl-0">tests</span><span class="hl-1">/</span><br/><span class="hl-1">├── </span><span class="hl-0">docs</span><span class="hl-1">/</span><br/><span class="hl-1">├── </span><span class="hl-0">config</span><span class="hl-1">/</span><br/><span class="hl-1">├── </span><span class="hl-0">package</span><span class="hl-1">.</span><span class="hl-0">json</span><br/><span class="hl-1">├── </span><span class="hl-0">tsconfig</span><span class="hl-1">.</span><span class="hl-0">json</span><br/><span class="hl-1">└── </span><span class="hl-2">README</span><span class="hl-1">.</span><span class="hl-0">md</span>
+</code><button>Copy</button></pre>
+
+<p>Main directories:</p>
+<ul>
+<li><code>src/modules/</code> - Contains all application modules organized by functionality</li>
+<li><code>dist/</code> - Build output</li>
+<li><code>tests/</code> - Unit and integration tests</li>
+<li><code>docs/</code> - Additional documentation</li>
+<li><code>config/</code> - Configuration files for build and development</li>
+</ul>
+<h3 id="module-architecture" class="tsd-anchor-link">Module Architecture<a href="#module-architecture" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>The project is built using a modular architecture where each component is presented as an independent module with clear interfaces:</p>
+<ul>
+<li><strong>AudioInputModule</strong>: Handles microphone access and audio input processing</li>
+<li><strong>RecordingEngineModule</strong>: Manages recording lifecycle (start/stop/pause)</li>
+<li><strong>AudioProcessingModule</strong>: Applies filters and processes audio in real-time</li>
+<li><strong>EncodingModule</strong>: Encodes audio into various formats (WAV, MP3, OGG, etc.)</li>
+<li><strong>FileManagerModule</strong>: Manages file operations and recording exports</li>
+<li><strong>TranscriptionModule</strong>: Converts speech to text using Web Speech API</li>
+<li><strong>TranslationModule</strong>: Translates text between languages using external APIs</li>
+<li><strong>VoiceoverModule</strong>: Generates speech from text using TTS engines</li>
+<li><strong>StorageModule</strong>: Handles local storage (localStorage, IndexedDB)</li>
+<li><strong>UILayoutModule</strong>: Manages UI components and accordion interface</li>
+<li><strong>SettingsModule</strong>: Manages application configuration and preferences</li>
+<li><strong>LoggingModule</strong>: Handles application logging and diagnostics</li>
+<li><strong>PluginManagerModule</strong>: Controls plugin activation and deactivation</li>
+</ul>
+<p>During compilation, all modules are combined into a single final HTML file including all necessary code.</p>
+<h3 id="data-flow" class="tsd-anchor-link">Data Flow<a href="#data-flow" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>The application follows a unidirectional data flow:</p>
+<ol>
+<li><strong>Input</strong>: Audio captured from microphone via Web Audio API</li>
+<li><strong>Processing</strong>: Real-time audio processing and filtering</li>
+<li><strong>Encoding</strong>: Conversion to desired output format</li>
+<li><strong>Storage</strong>: Saving to client-side storage (Blob)</li>
+<li><strong>Export</strong>: Download/export functionality</li>
+<li><strong>Analysis</strong>: Transcription and translation services</li>
+<li><strong>Output</strong>: Playback and voiceover capabilities</li>
+</ol>
+<h3 id="plugin-system-architecture" class="tsd-anchor-link">Plugin System Architecture<a href="#plugin-system-architecture" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>The plugin system enables modular functionality. Each plugin operates independently and can be enabled/disabled through the settings interface. The Plugin Manager controls activation and deactivation of individual modules, allowing users to customize the application functionality according to their needs.</p>
+<h2 id="interface" class="tsd-anchor-link">Interface<a href="#interface" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>The project interface is implemented using accordions with HTML <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code> elements, allowing efficient content organization and improved user experience through expandable and collapsible sections.</p>
+<p>Main interface accordions:</p>
+<h3 id="1-recorder" class="tsd-anchor-link">1. Recorder<a href="#1-recorder" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<pre><code class="html"><span class="hl-3">&lt;</span><span class="hl-4">details</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;</span><span class="hl-4">summary</span><span class="hl-3">&gt;</span><span class="hl-1">Recorder</span><span class="hl-3">&lt;/</span><span class="hl-4">summary</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;</span><span class="hl-4">div</span><span class="hl-1"> </span><span class="hl-5">class</span><span class="hl-1">=</span><span class="hl-6">&quot;recorder-controls&quot;</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">button</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;recordBtn&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">Record</span><span class="hl-3">&lt;/</span><span class="hl-4">button</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">button</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;stopBtn&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">Stop</span><span class="hl-3">&lt;/</span><span class="hl-4">button</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">div</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;recorderStatus&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">Ready to record</span><span class="hl-3">&lt;/</span><span class="hl-4">div</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">div</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;voiceTranscriptionControls&quot;</span><span class="hl-3">&gt;</span><br/><span class="hl-1">      </span><span class="hl-3">&lt;</span><span class="hl-4">button</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;transcribeBtn&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">Transcribe</span><span class="hl-3">&lt;/</span><span class="hl-4">button</span><span class="hl-3">&gt;</span><br/><span class="hl-1">      </span><span class="hl-3">&lt;</span><span class="hl-4">button</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;translateBtn&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">Translate</span><span class="hl-3">&lt;/</span><span class="hl-4">button</span><span class="hl-3">&gt;</span><br/><span class="hl-1">      </span><span class="hl-3">&lt;</span><span class="hl-4">button</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;voiceoverBtn&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">Voiceover</span><span class="hl-3">&lt;/</span><span class="hl-4">button</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;/</span><span class="hl-4">div</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;/</span><span class="hl-4">div</span><span class="hl-3">&gt;</span><br/><span class="hl-3">&lt;/</span><span class="hl-4">details</span><span class="hl-3">&gt;</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="2-history" class="tsd-anchor-link">2. History<a href="#2-history" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<pre><code class="html"><span class="hl-3">&lt;</span><span class="hl-4">details</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;</span><span class="hl-4">summary</span><span class="hl-3">&gt;</span><span class="hl-1">History</span><span class="hl-3">&lt;/</span><span class="hl-4">summary</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;</span><span class="hl-4">div</span><span class="hl-1"> </span><span class="hl-5">class</span><span class="hl-1">=</span><span class="hl-6">&quot;history-panel&quot;</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">ul</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;recordingsList&quot;</span><span class="hl-3">&gt;</span><br/><span class="hl-1">      </span><span class="hl-7">&lt;!-- Recordings will appear here in order from newest to oldest --&gt;</span><br/><span class="hl-1">      </span><span class="hl-7">&lt;!-- Each recording will include audio, transcription, translation, and metadata --&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;/</span><span class="hl-4">ul</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;/</span><span class="hl-4">div</span><span class="hl-3">&gt;</span><br/><span class="hl-3">&lt;/</span><span class="hl-4">details</span><span class="hl-3">&gt;</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Recordings are stored in localStorage and IndexedDB to ensure maximum possible long-term storage between sessions. History is sorted from newest to oldest recordings.</p>
+<h3 id="3-settings" class="tsd-anchor-link">3. Settings<a href="#3-settings" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<pre><code class="html"><span class="hl-3">&lt;</span><span class="hl-4">details</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;</span><span class="hl-4">summary</span><span class="hl-3">&gt;</span><span class="hl-1">Settings</span><span class="hl-3">&lt;/</span><span class="hl-4">summary</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;</span><span class="hl-4">div</span><span class="hl-1"> </span><span class="hl-5">class</span><span class="hl-1">=</span><span class="hl-6">&quot;settings-panel&quot;</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">label</span><span class="hl-3">&gt;</span><span class="hl-1">Sample Rate: </span><span class="hl-3">&lt;</span><span class="hl-4">input</span><span class="hl-1"> </span><span class="hl-5">type</span><span class="hl-1">=</span><span class="hl-6">&quot;number&quot;</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;sampleRate&quot;</span><span class="hl-1"> </span><span class="hl-5">value</span><span class="hl-1">=</span><span class="hl-6">&quot;44100&quot;</span><span class="hl-3">&gt;&lt;/</span><span class="hl-4">label</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">label</span><span class="hl-3">&gt;</span><span class="hl-1">Bitrate: </span><span class="hl-3">&lt;</span><span class="hl-4">input</span><span class="hl-1"> </span><span class="hl-5">type</span><span class="hl-1">=</span><span class="hl-6">&quot;number&quot;</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;bitrate&quot;</span><span class="hl-1"> </span><span class="hl-5">value</span><span class="hl-1">=</span><span class="hl-6">&quot;128000&quot;</span><span class="hl-3">&gt;&lt;/</span><span class="hl-4">label</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">label</span><span class="hl-3">&gt;</span><span class="hl-1">Format: </span><span class="hl-3">&lt;</span><span class="hl-4">select</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;audioFormat&quot;</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">option</span><span class="hl-1"> </span><span class="hl-5">value</span><span class="hl-1">=</span><span class="hl-6">&quot;wav&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">WAV</span><span class="hl-3">&lt;/</span><span class="hl-4">option</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">option</span><span class="hl-1"> </span><span class="hl-5">value</span><span class="hl-1">=</span><span class="hl-6">&quot;mp3&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">MP3</span><span class="hl-3">&lt;/</span><span class="hl-4">option</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">option</span><span class="hl-1"> </span><span class="hl-5">value</span><span class="hl-1">=</span><span class="hl-6">&quot;ogg&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">OGG</span><span class="hl-3">&lt;/</span><span class="hl-4">option</span><span class="hl-3">&gt;&lt;/</span><span class="hl-4">select</span><span class="hl-3">&gt;&lt;/</span><span class="hl-4">label</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">label</span><span class="hl-3">&gt;</span><span class="hl-1">Transcription Language: </span><span class="hl-3">&lt;</span><span class="hl-4">select</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;transcriptionLang&quot;</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">option</span><span class="hl-1"> </span><span class="hl-5">value</span><span class="hl-1">=</span><span class="hl-6">&quot;ru&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">Russian</span><span class="hl-3">&lt;/</span><span class="hl-4">option</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">option</span><span class="hl-1"> </span><span class="hl-5">value</span><span class="hl-1">=</span><span class="hl-6">&quot;en&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">English</span><span class="hl-3">&lt;/</span><span class="hl-4">option</span><span class="hl-3">&gt;&lt;/</span><span class="hl-4">select</span><span class="hl-3">&gt;&lt;/</span><span class="hl-4">label</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">label</span><span class="hl-3">&gt;</span><span class="hl-1">Translation Language: </span><span class="hl-3">&lt;</span><span class="hl-4">select</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;translationLang&quot;</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">option</span><span class="hl-1"> </span><span class="hl-5">value</span><span class="hl-1">=</span><span class="hl-6">&quot;en&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">English</span><span class="hl-3">&lt;/</span><span class="hl-4">option</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">option</span><span class="hl-1"> </span><span class="hl-5">value</span><span class="hl-1">=</span><span class="hl-6">&quot;ru&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">Russian</span><span class="hl-3">&lt;/</span><span class="hl-4">option</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">option</span><span class="hl-1"> </span><span class="hl-5">value</span><span class="hl-1">=</span><span class="hl-6">&quot;de&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">German</span><span class="hl-3">&lt;/</span><span class="hl-4">option</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">option</span><span class="hl-1"> </span><span class="hl-5">value</span><span class="hl-1">=</span><span class="hl-6">&quot;fr&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">French</span><span class="hl-3">&lt;/</span><span class="hl-4">option</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">option</span><span class="hl-1"> </span><span class="hl-5">value</span><span class="hl-1">=</span><span class="hl-6">&quot;es&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">Spanish</span><span class="hl-3">&lt;/</span><span class="hl-4">option</span><span class="hl-3">&gt;&lt;/</span><span class="hl-4">select</span><span class="hl-3">&gt;&lt;/</span><span class="hl-4">label</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">label</span><span class="hl-3">&gt;</span><span class="hl-1">Retention Period: </span><span class="hl-3">&lt;</span><span class="hl-4">select</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;retentionPeriod&quot;</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">option</span><span class="hl-1"> </span><span class="hl-5">value</span><span class="hl-1">=</span><span class="hl-6">&quot;never&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">Never delete</span><span class="hl-3">&lt;/</span><span class="hl-4">option</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">option</span><span class="hl-1"> </span><span class="hl-5">value</span><span class="hl-1">=</span><span class="hl-6">&quot;7&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">7 days</span><span class="hl-3">&lt;/</span><span class="hl-4">option</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">option</span><span class="hl-1"> </span><span class="hl-5">value</span><span class="hl-1">=</span><span class="hl-6">&quot;30&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">30 days</span><span class="hl-3">&lt;/</span><span class="hl-4">option</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">option</span><span class="hl-1"> </span><span class="hl-5">value</span><span class="hl-1">=</span><span class="hl-6">&quot;90&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">90 days</span><span class="hl-3">&lt;/</span><span class="hl-4">option</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">option</span><span class="hl-1"> </span><span class="hl-5">value</span><span class="hl-1">=</span><span class="hl-6">&quot;clear&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">Full cleanup</span><span class="hl-3">&lt;/</span><span class="hl-4">option</span><span class="hl-3">&gt;&lt;/</span><span class="hl-4">select</span><span class="hl-3">&gt;&lt;/</span><span class="hl-4">label</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;/</span><span class="hl-4">div</span><span class="hl-3">&gt;</span><br/><span class="hl-3">&lt;/</span><span class="hl-4">details</span><span class="hl-3">&gt;</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="4-plugins" class="tsd-anchor-link">4. Plugins<a href="#4-plugins" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<pre><code class="html"><span class="hl-3">&lt;</span><span class="hl-4">details</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;</span><span class="hl-4">summary</span><span class="hl-3">&gt;</span><span class="hl-1">Plugins</span><span class="hl-3">&lt;/</span><span class="hl-4">summary</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;</span><span class="hl-4">div</span><span class="hl-1"> </span><span class="hl-5">class</span><span class="hl-1">=</span><span class="hl-6">&quot;plugins-panel&quot;</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">label</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">input</span><span class="hl-1"> </span><span class="hl-5">type</span><span class="hl-1">=</span><span class="hl-6">&quot;checkbox&quot;</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;recorderEnabled&quot;</span><span class="hl-1"> </span><span class="hl-5">checked</span><span class="hl-3">&gt;</span><span class="hl-1"> Recording Module</span><span class="hl-3">&lt;/</span><span class="hl-4">label</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">label</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">input</span><span class="hl-1"> </span><span class="hl-5">type</span><span class="hl-1">=</span><span class="hl-6">&quot;checkbox&quot;</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;transcriptionEnabled&quot;</span><span class="hl-1"> </span><span class="hl-5">checked</span><span class="hl-3">&gt;</span><span class="hl-1"> Transcription Module</span><span class="hl-3">&lt;/</span><span class="hl-4">label</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">label</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">input</span><span class="hl-1"> </span><span class="hl-5">type</span><span class="hl-1">=</span><span class="hl-6">&quot;checkbox&quot;</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;translationEnabled&quot;</span><span class="hl-1"> </span><span class="hl-5">checked</span><span class="hl-3">&gt;</span><span class="hl-1"> Translation Module</span><span class="hl-3">&lt;/</span><span class="hl-4">label</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">label</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">input</span><span class="hl-1"> </span><span class="hl-5">type</span><span class="hl-1">=</span><span class="hl-6">&quot;checkbox&quot;</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;voiceoverEnabled&quot;</span><span class="hl-1"> </span><span class="hl-5">checked</span><span class="hl-3">&gt;</span><span class="hl-1"> Voiceover Module</span><span class="hl-3">&lt;/</span><span class="hl-4">label</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">label</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">input</span><span class="hl-1"> </span><span class="hl-5">type</span><span class="hl-1">=</span><span class="hl-6">&quot;checkbox&quot;</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;historyEnabled&quot;</span><span class="hl-1"> </span><span class="hl-5">checked</span><span class="hl-3">&gt;</span><span class="hl-1"> History</span><span class="hl-3">&lt;/</span><span class="hl-4">label</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">label</span><span class="hl-3">&gt;&lt;</span><span class="hl-4">input</span><span class="hl-1"> </span><span class="hl-5">type</span><span class="hl-1">=</span><span class="hl-6">&quot;checkbox&quot;</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;settingsEnabled&quot;</span><span class="hl-1"> </span><span class="hl-5">checked</span><span class="hl-3">&gt;</span><span class="hl-1"> Settings</span><span class="hl-3">&lt;/</span><span class="hl-4">label</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;/</span><span class="hl-4">div</span><span class="hl-3">&gt;</span><br/><span class="hl-3">&lt;/</span><span class="hl-4">details</span><span class="hl-3">&gt;</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="5-help" class="tsd-anchor-link">5. Help<a href="#5-help" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<pre><code class="html"><span class="hl-3">&lt;</span><span class="hl-4">details</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;</span><span class="hl-4">summary</span><span class="hl-3">&gt;</span><span class="hl-1">Help</span><span class="hl-3">&lt;/</span><span class="hl-4">summary</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;</span><span class="hl-4">div</span><span class="hl-1"> </span><span class="hl-5">class</span><span class="hl-1">=</span><span class="hl-6">&quot;help-panel&quot;</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">h3</span><span class="hl-3">&gt;</span><span class="hl-1">Documentation</span><span class="hl-3">&lt;/</span><span class="hl-4">h3</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">p</span><span class="hl-3">&gt;</span><span class="hl-1">To get help on using the application, see the Frequently Asked Questions (FAQ) section below.</span><span class="hl-3">&lt;/</span><span class="hl-4">p</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">h3</span><span class="hl-3">&gt;</span><span class="hl-1">Support</span><span class="hl-3">&lt;/</span><span class="hl-4">h3</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">p</span><span class="hl-3">&gt;</span><span class="hl-1">If you have problems, open an issue in the project repository.</span><span class="hl-3">&lt;/</span><span class="hl-4">p</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;/</span><span class="hl-4">div</span><span class="hl-3">&gt;</span><br/><span class="hl-3">&lt;/</span><span class="hl-4">details</span><span class="hl-3">&gt;</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="6-log" class="tsd-anchor-link">6. Log<a href="#6-log" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<pre><code class="html"><span class="hl-3">&lt;</span><span class="hl-4">details</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;</span><span class="hl-4">summary</span><span class="hl-3">&gt;</span><span class="hl-1">Log</span><span class="hl-3">&lt;/</span><span class="hl-4">summary</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;</span><span class="hl-4">div</span><span class="hl-1"> </span><span class="hl-5">class</span><span class="hl-1">=</span><span class="hl-6">&quot;log-panel&quot;</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">pre</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;logOutput&quot;</span><span class="hl-3">&gt;&lt;/</span><span class="hl-4">pre</span><span class="hl-3">&gt;</span><br/><span class="hl-1">    </span><span class="hl-3">&lt;</span><span class="hl-4">button</span><span class="hl-1"> </span><span class="hl-5">id</span><span class="hl-1">=</span><span class="hl-6">&quot;exportLogsBtn&quot;</span><span class="hl-3">&gt;</span><span class="hl-1">Export logs</span><span class="hl-3">&lt;/</span><span class="hl-4">button</span><span class="hl-3">&gt;</span><br/><span class="hl-1">  </span><span class="hl-3">&lt;/</span><span class="hl-4">div</span><span class="hl-3">&gt;</span><br/><span class="hl-3">&lt;/</span><span class="hl-4">details</span><span class="hl-3">&gt;</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Complete logging of all processes, from function calls to user actions, for diagnostics and debugging. Logs include application performance information and can be exported on demand.</p>
+<p>This approach ensures:</p>
+<ul>
+<li>Clean and organized interface structure</li>
+<li>Ability to hide and show content as needed</li>
+<li>Compatibility with modern browsers (desktop and mobile)</li>
+<li>Independence from CSS frameworks</li>
+<li>Ease of maintenance and modification</li>
+<li>Ability to play recordings directly in the interface</li>
+<li>Support for metadata for each recording (title, date, duration, language, etc.)</li>
+<li>Flexibility in configuring functionality through the plugin system</li>
+</ul>
+<h2 id="getting-started" class="tsd-anchor-link">Getting Started<a href="#getting-started" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<h3 id="prerequisites" class="tsd-anchor-link">Prerequisites<a href="#prerequisites" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li>Modern browser supporting Web Audio API, MediaRecorder API, and Web Speech API</li>
+<li>Permissions for microphone access</li>
+<li>Internet connection (for transcription, translation, and voiceover)</li>
+</ul>
+<h3 id="installation" class="tsd-anchor-link">Installation<a href="#installation" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Since this is a serverless solution, no installation is required. Simply open the HTML file in a compatible browser:</p>
+<pre><code class="bash"><span class="hl-7"># Clone repository</span><br/><span class="hl-8">git</span><span class="hl-1"> </span><span class="hl-9">clone</span><span class="hl-1"> </span><span class="hl-9">https://github.com/olegzai/recorder.git</span><br/><span class="hl-8">cd</span><span class="hl-1"> </span><span class="hl-9">recorder</span><br/><br/><span class="hl-7"># Open in browser (macOS)</span><br/><span class="hl-8">open</span><span class="hl-1"> </span><span class="hl-9">index.html</span><br/><br/><span class="hl-7"># Open in browser (Linux)</span><br/><span class="hl-8">xdg-open</span><span class="hl-1"> </span><span class="hl-9">index.html</span><br/><br/><span class="hl-7"># Open in browser (Windows)</span><br/><span class="hl-8">start</span><span class="hl-1"> </span><span class="hl-9">index.html</span>
+</code><button type="button">Copy</button></pre>
+
+<p>Or run via local HTTP server:</p>
+<pre><code class="bash"><span class="hl-7"># Using Python</span><br/><span class="hl-8">python</span><span class="hl-1"> </span><span class="hl-10">-m</span><span class="hl-1"> </span><span class="hl-9">http.server</span><span class="hl-1"> </span><span class="hl-11">8000</span><br/><br/><span class="hl-7"># Using Node.js</span><br/><span class="hl-8">npx</span><span class="hl-1"> </span><span class="hl-9">http-server</span><br/><br/><span class="hl-7"># Then go to http://localhost:8000</span>
+</code><button type="button">Copy</button></pre>
+
+<h3 id="development" class="tsd-anchor-link">Development<a href="#development" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>For development and testing in real-time:</p>
+<pre><code class="bash"><span class="hl-7"># Install dependencies</span><br/><span class="hl-8">npm</span><span class="hl-1"> </span><span class="hl-9">install</span><br/><br/><span class="hl-7"># Run in development mode with live reload</span><br/><span class="hl-8">npm</span><span class="hl-1"> </span><span class="hl-9">run</span><span class="hl-1"> </span><span class="hl-9">dev</span><br/><br/><span class="hl-7"># Run tests</span><br/><span class="hl-8">npm</span><span class="hl-1"> </span><span class="hl-9">run</span><span class="hl-1"> </span><span class="hl-9">test</span><br/><br/><span class="hl-7"># Check code for style errors</span><br/><span class="hl-8">npm</span><span class="hl-1"> </span><span class="hl-9">run</span><span class="hl-1"> </span><span class="hl-9">lint</span><br/><br/><span class="hl-7"># Build for production</span><br/><span class="hl-8">npm</span><span class="hl-1"> </span><span class="hl-9">run</span><span class="hl-1"> </span><span class="hl-9">build</span>
+</code><button type="button">Copy</button></pre>
+
+<h4 id="local-setup" class="tsd-anchor-link">Local Setup<a href="#local-setup" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ol>
+<li>Clone the repository</li>
+<li>Run <code>npm install</code> to install dependencies</li>
+<li>Run <code>npm run dev</code> to start the development server</li>
+<li>Open your browser to the provided URL</li>
+</ol>
+<h3 id="building-the-project" class="tsd-anchor-link">Building the Project<a href="#building-the-project" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>The project uses a modular architecture where each component is developed as an independent module. To create the final HTML file including all code, execute:</p>
+<pre><code class="bash"><span class="hl-7"># Build project to single HTML file</span><br/><span class="hl-8">npm</span><span class="hl-1"> </span><span class="hl-9">run</span><span class="hl-1"> </span><span class="hl-9">build</span><br/><span class="hl-7"># or</span><br/><span class="hl-8">yarn</span><span class="hl-1"> </span><span class="hl-9">build</span>
+</code><button type="button">Copy</button></pre>
+
+<p>This will create a single HTML file containing all necessary code, styles, and resources.</p>
+<h3 id="usage" class="tsd-anchor-link">Usage<a href="#usage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ol>
+<li>Open the application in your browser</li>
+<li>Grant microphone access when prompted</li>
+<li>Click the record button to start voice recording</li>
+<li>Click the stop button to finish recording</li>
+<li>Use transcription, translation, and voiceover buttons for additional processing</li>
+<li>View and play your recordings in the &quot;History&quot; accordion</li>
+<li>Configure parameters in the &quot;Settings&quot; accordion as desired</li>
+<li>Manage application functionality through the &quot;Plugins&quot; accordion</li>
+</ol>
+<h4 id="quick-start-guide" class="tsd-anchor-link">Quick Start Guide<a href="#quick-start-guide" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ul>
+<li><strong>Record</strong>: Click the &quot;Record&quot; button to begin recording</li>
+<li><strong>Stop</strong>: Click the &quot;Stop&quot; button to end recording</li>
+<li><strong>Transcribe</strong>: Convert speech to text using the &quot;Transcribe&quot; button</li>
+<li><strong>Translate</strong>: Translate text to another language using the &quot;Translate&quot; button</li>
+<li><strong>Voiceover</strong>: Listen to translated text using the &quot;Voiceover&quot; button</li>
+<li><strong>Settings</strong>: Adjust recording quality and other parameters</li>
+<li><strong>History</strong>: Access your saved recordings and their metadata</li>
+<li><strong>Plugins</strong>: Enable/disable functionality as needed</li>
+</ul>
+<h4 id="tips-for-best-quality" class="tsd-anchor-link">Tips for Best Quality<a href="#tips-for-best-quality" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ul>
+<li>Use headphones to prevent feedback</li>
+<li>Record in a quiet environment</li>
+<li>Position microphone appropriately</li>
+<li>Adjust bitrate and sample rate for your needs</li>
+</ul>
+<h2 id="api-reference" class="tsd-anchor-link">API Reference<a href="#api-reference" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<h3 id="recording-functions" class="tsd-anchor-link">Recording Functions<a href="#recording-functions" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li><code>startRecording()</code> - Initiates audio recording</li>
+<li><code>stopRecording()</code> - Stops current recording and processes audio</li>
+<li><code>exportRecording(format)</code> - Exports recording in specified format</li>
+</ul>
+<h3 id="transcription-and-translation-functions" class="tsd-anchor-link">Transcription and Translation Functions<a href="#transcription-and-translation-functions" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li><code>transcribeAudio(audioBlob, language)</code> - Transcribes audio to text in specified language</li>
+<li><code>translateText(text, targetLanguage)</code> - Translates text to specified language</li>
+<li><code>voiceoverText(text, language)</code> - Voices over text with specified language/voice</li>
+</ul>
+<h3 id="plugin-management-functions" class="tsd-anchor-link">Plugin Management Functions<a href="#plugin-management-functions" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li><code>enablePlugin(pluginName)</code> - Enables specified plugin</li>
+<li><code>disablePlugin(pluginName)</code> - Disables specified plugin</li>
+<li><code>isPluginEnabled(pluginName)</code> - Checks if plugin is enabled</li>
+</ul>
+<h3 id="configuration-parameters" class="tsd-anchor-link">Configuration Parameters<a href="#configuration-parameters" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li><code>audioBitsPerSecond</code> - Sets audio bitrate</li>
+<li><code>sampleRate</code> - Specifies sample rate for recording</li>
+<li><code>channelCount</code> - Number of audio channels (mono/stereo)</li>
+<li><code>mimeType</code> - Desired output format (audio/wav, audio/webm, etc.)</li>
+<li><code>transcriptionLanguage</code> - Language for transcription (default Russian/English)</li>
+<li><code>translationLanguage</code> - Target language for translation</li>
+<li><code>retentionPeriod</code> - Retention period for recordings before automatic cleanup</li>
+</ul>
+<h3 id="usage-examples" class="tsd-anchor-link">Usage Examples<a href="#usage-examples" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<h4 id="basic-recording" class="tsd-anchor-link">Basic Recording<a href="#basic-recording" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<pre><code class="javascript"><span class="hl-7">// Start recording</span><br/><span class="hl-8">startRecording</span><span class="hl-1">();</span><br/><br/><span class="hl-7">// Stop recording after 10 seconds</span><br/><span class="hl-8">setTimeout</span><span class="hl-1">(() </span><span class="hl-10">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-8">stopRecording</span><span class="hl-1">();</span><br/><span class="hl-1">}, </span><span class="hl-11">10000</span><span class="hl-1">);</span>
+</code><button type="button">Copy</button></pre>
+
+<h4 id="transcription" class="tsd-anchor-link">Transcription<a href="#transcription" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<pre><code class="javascript"><span class="hl-7">// Transcribe audio to text</span><br/><span class="hl-10">const</span><span class="hl-1"> </span><span class="hl-2">audioBlob</span><span class="hl-1"> = </span><span class="hl-10">new</span><span class="hl-1"> </span><span class="hl-8">Blob</span><span class="hl-1">([</span><span class="hl-0">audioData</span><span class="hl-1">], { </span><span class="hl-0">type:</span><span class="hl-1"> </span><span class="hl-9">&#39;audio/wav&#39;</span><span class="hl-1"> });</span><br/><span class="hl-10">const</span><span class="hl-1"> </span><span class="hl-2">transcription</span><span class="hl-1"> = </span><span class="hl-12">await</span><span class="hl-1"> </span><span class="hl-8">transcribeAudio</span><span class="hl-1">(</span><span class="hl-0">audioBlob</span><span class="hl-1">, </span><span class="hl-9">&#39;en&#39;</span><span class="hl-1">);</span><br/><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-8">log</span><span class="hl-1">(</span><span class="hl-0">transcription</span><span class="hl-1">);</span>
+</code><button type="button">Copy</button></pre>
+
+<h4 id="plugin-management" class="tsd-anchor-link">Plugin Management<a href="#plugin-management" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<pre><code class="javascript"><span class="hl-7">// Enable transcription plugin</span><br/><span class="hl-8">enablePlugin</span><span class="hl-1">(</span><span class="hl-9">&#39;transcription&#39;</span><span class="hl-1">);</span><br/><br/><span class="hl-7">// Check if translation plugin is enabled</span><br/><span class="hl-12">if</span><span class="hl-1"> (</span><span class="hl-8">isPluginEnabled</span><span class="hl-1">(</span><span class="hl-9">&#39;translation&#39;</span><span class="hl-1">)) {</span><br/><span class="hl-1">  </span><span class="hl-7">// Perform translation</span><br/><span class="hl-1">}</span>
+</code><button type="button">Copy</button></pre>
+
+<h2 id="browser-support" class="tsd-anchor-link">Browser Support<a href="#browser-support" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<h3 id="desktop-browsers" class="tsd-anchor-link">Desktop Browsers<a href="#desktop-browsers" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li>Chrome 49+ (full support)</li>
+<li>Firefox 43+ (partial Web Speech API support)</li>
+<li>Safari 14+ (with limitations)</li>
+<li>Edge 79+ (full support)</li>
+<li>Opera 36+ (full support)</li>
+</ul>
+<h3 id="mobile-browsers" class="tsd-anchor-link">Mobile Browsers<a href="#mobile-browsers" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li>Chrome for Android (full support)</li>
+<li>Safari on iOS (with limitations)</li>
+<li>Firefox for Mobile (partial support)</li>
+</ul>
+<h3 id="feature-support-matrix" class="tsd-anchor-link">Feature Support Matrix<a href="#feature-support-matrix" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Chrome</th>
+<th>Firefox</th>
+<th>Safari</th>
+<th>Edge</th>
+<th>Opera</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MediaRecorder API</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Web Audio API</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Web Speech API</td>
+<td>✅</td>
+<td>⚠️</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>IndexedDB</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ = Partial support
+❌ = Not supported
+✅ = Full support</p>
+<h2 id="security-and-privacy" class="tsd-anchor-link">Security and Privacy<a href="#security-and-privacy" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<ul>
+<li>All audio processing occurs on the client side</li>
+<li>Data is not sent to external servers (except for transcription/translation API requests)</li>
+<li>Explicit user permission required for microphone access</li>
+<li>Recording stops when user leaves the page</li>
+<li>Silence detection support for recording optimization</li>
+<li>Local storage of confidential recordings</li>
+</ul>
+<h2 id="limitations" class="tsd-anchor-link">Limitations<a href="#limitations" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<ul>
+<li>Recording duration is potentially unlimited (limited only by browser memory)</li>
+<li>Safari has limited MediaRecorder API and Web Speech API support</li>
+<li>Mobile browsers may have additional limitations</li>
+<li>Transcription and translation functions require internet connection</li>
+</ul>
+<h2 id="configuration" class="tsd-anchor-link">Configuration<a href="#configuration" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>The application can be configured through the settings interface:</p>
+<ul>
+<li><strong>Sample Rate</strong>: from 8000 Hz to 96000 Hz (default 44100 Hz)</li>
+<li><strong>Bitrate</strong>: from 64 kbps to 320 kbps (default 128 kbps)</li>
+<li><strong>Audio Format</strong>: WAV, MP3, OGG and other supported formats</li>
+<li><strong>Languages</strong>: Russian and English support for transcription, more than 20 languages for translation</li>
+<li><strong>Retention Period</strong>: configure automatic cleanup of recordings by date</li>
+</ul>
+<h3 id="configuration-options-explained" class="tsd-anchor-link">Configuration Options Explained<a href="#configuration-options-explained" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<h4 id="sample-rate" class="tsd-anchor-link">Sample Rate<a href="#sample-rate" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ul>
+<li><strong>8000 Hz</strong>: Low quality, small file size (suitable for voice only)</li>
+<li><strong>11025 Hz</strong>: Low quality, slightly better than 8000 Hz</li>
+<li><strong>22050 Hz</strong>: Medium quality, moderate file size</li>
+<li><strong>44100 Hz</strong>: CD quality, standard for most applications</li>
+<li><strong>48000 Hz</strong>: DVD quality, standard for video applications</li>
+<li><strong>96000 Hz</strong>: High fidelity, very large file size</li>
+</ul>
+<h4 id="bitrate" class="tsd-anchor-link">Bitrate<a href="#bitrate" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ul>
+<li><strong>64 kbps</strong>: Low quality, suitable for voice</li>
+<li><strong>128 kbps</strong>: Standard quality, good balance of size and quality</li>
+<li><strong>192 kbps</strong>: High quality, larger file size</li>
+<li><strong>320 kbps</strong>: Maximum quality, largest file size</li>
+</ul>
+<h4 id="audio-formats" class="tsd-anchor-link">Audio Formats<a href="#audio-formats" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ul>
+<li><strong>WAV</strong>: Uncompressed, high quality, large file size</li>
+<li><strong>MP3</strong>: Compressed, good quality, smaller file size</li>
+<li><strong>OGG</strong>: Compressed, good quality, open format</li>
+<li><strong>WebM</strong>: Compressed, designed for web use</li>
+</ul>
+<h2 id="performance" class="tsd-anchor-link">Performance<a href="#performance" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>The application is optimized for browser operation:</p>
+<ul>
+<li>Uses minimal system resources</li>
+<li>Audio processing occurs in real-time</li>
+<li>Efficient memory management for long recordings</li>
+<li>Optimization for devices with limited resources</li>
+</ul>
+<h3 id="performance-metrics" class="tsd-anchor-link">Performance Metrics<a href="#performance-metrics" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<h4 id="memory-usage" class="tsd-anchor-link">Memory Usage<a href="#memory-usage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ul>
+<li><strong>Idle</strong>: ~5-10 MB RAM</li>
+<li><strong>Recording</strong>: ~15-25 MB RAM</li>
+<li><strong>Transcribing</strong>: ~20-35 MB RAM</li>
+<li><strong>Translating</strong>: ~15-30 MB RAM</li>
+</ul>
+<h4 id="processing-time" class="tsd-anchor-link">Processing Time<a href="#processing-time" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ul>
+<li><strong>Real-time recording</strong>: 1x speed (real-time)</li>
+<li><strong>Transcription</strong>: ~10-30 seconds per minute of audio</li>
+<li><strong>Translation</strong>: ~5-15 seconds per minute of audio</li>
+<li><strong>Export</strong>: ~1-5 seconds per minute of audio</li>
+</ul>
+<h4 id="supported-recording-lengths" class="tsd-anchor-link">Supported Recording Lengths<a href="#supported-recording-lengths" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ul>
+<li><strong>Short recordings</strong>: Up to 10 minutes (recommended)</li>
+<li><strong>Medium recordings</strong>: 10-30 minutes (possible)</li>
+<li><strong>Long recordings</strong>: 30+ minutes (requires sufficient memory)</li>
+</ul>
+<h3 id="performance-optimization-tips" class="tsd-anchor-link">Performance Optimization Tips<a href="#performance-optimization-tips" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li>Close other browser tabs to free memory</li>
+<li>Use headphones to prevent feedback (reduces processing)</li>
+<li>Choose appropriate sample rate and bitrate for your needs</li>
+<li>Regularly clear old recordings to free storage</li>
+<li>Use WAV format for faster processing (larger files)</li>
+<li>Use compressed formats (MP3/OGG) for smaller files (slower processing)</li>
+</ul>
+<h2 id="troubleshooting" class="tsd-anchor-link">Troubleshooting<a href="#troubleshooting" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>If you have problems with the application:</p>
+<h3 id="common-issues" class="tsd-anchor-link">Common Issues<a href="#common-issues" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ol>
+<li>
+<p><strong>Microphone access problems</strong>:</p>
+<ul>
+<li>Check browser permissions for microphone access</li>
+<li>Ensure microphone is not used by other applications</li>
+<li>Reload page and grant permission again</li>
+<li>Check that microphone is properly connected</li>
+</ul>
+</li>
+<li>
+<p><strong>Transcription/translation problems</strong>:</p>
+<ul>
+<li>Check internet connection</li>
+<li>Ensure Web Speech API is supported by your browser</li>
+<li>Try using a different language for transcription</li>
+<li>Verify that you have internet access for API calls</li>
+</ul>
+</li>
+<li>
+<p><strong>Performance problems</strong>:</p>
+<ul>
+<li>Close other browser tabs to free memory</li>
+<li>Check available space on device</li>
+<li>Update browser to the latest version</li>
+<li>Reduce sample rate or bitrate settings</li>
+</ul>
+</li>
+</ol>
+<h3 id="browser-specific-issues" class="tsd-anchor-link">Browser-Specific Issues<a href="#browser-specific-issues" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<h4 id="chrome" class="tsd-anchor-link">Chrome<a href="#chrome" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ul>
+<li><strong>Microphone access</strong>: Check chrome://settings/content/microphone</li>
+<li><strong>Extensions</strong>: Disable extensions that might interfere with audio</li>
+<li><strong>Flags</strong>: Check chrome://flags/#enable-experimental-web-platform-features</li>
+</ul>
+<h4 id="firefox" class="tsd-anchor-link">Firefox<a href="#firefox" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ul>
+<li><strong>Permissions</strong>: Check about:preferences#privacy</li>
+<li><strong>Security</strong>: May require HTTPS for microphone access</li>
+<li><strong>Settings</strong>: Check media.getusermedia.screensharing.allowed_domains in about:config</li>
+</ul>
+<h4 id="safari" class="tsd-anchor-link">Safari<a href="#safari" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ul>
+<li><strong>Permissions</strong>: Check Safari &gt; Preferences &gt; Websites &gt; Camera/Microphone</li>
+<li><strong>Security</strong>: May require HTTPS for Web Speech API</li>
+<li><strong>Version</strong>: Limited support for MediaRecorder API</li>
+</ul>
+<h3 id="advanced-troubleshooting" class="tsd-anchor-link">Advanced Troubleshooting<a href="#advanced-troubleshooting" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<h4 id="debugging" class="tsd-anchor-link">Debugging<a href="#debugging" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ul>
+<li>Open browser developer tools (F12)</li>
+<li>Check Console tab for error messages</li>
+<li>Check Network tab for failed API requests</li>
+<li>Look for warnings about deprecated APIs</li>
+</ul>
+<h4 id="diagnostic-information" class="tsd-anchor-link">Diagnostic Information<a href="#diagnostic-information" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<ul>
+<li>Browser version and operating system</li>
+<li>Available memory and storage</li>
+<li>Network connectivity status</li>
+<li>Microphone and audio device status</li>
+</ul>
+<h3 id="when-to-report-issues" class="tsd-anchor-link">When to Report Issues<a href="#when-to-report-issues" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Report issues when:</p>
+<ul>
+<li>Following all troubleshooting steps doesn't resolve the problem</li>
+<li>Error messages indicate a bug in the application</li>
+<li>Feature doesn't work as documented</li>
+<li>Performance is significantly below expectations</li>
+</ul>
+<h2 id="development-roadmap" class="tsd-anchor-link">Development Roadmap<a href="#development-roadmap" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Detailed versioning plan and development stages are described in the <a href="media/VERSIONS.md">VERSIONS.md</a> file.</p>
+<p>Development proceeds using modular architecture where each functional block is implemented as an independent module, which is then integrated into the final build.</p>
+<h3 id="phase-1-core-functionality" class="tsd-anchor-link">Phase 1: Core Functionality<a href="#phase-1-core-functionality" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li>[x] Basic audio recording function</li>
+<li>[x] Playback of recordings in interface</li>
+<li>[x] Adding metadata to recordings</li>
+</ul>
+<h3 id="phase-2-processing-features" class="tsd-anchor-link">Phase 2: Processing Features<a href="#phase-2-processing-features" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li>[x] Speech transcription (Russian and English)</li>
+<li>[x] Translation to different languages</li>
+<li>[x] Voiceover of translated text</li>
+<li>[x] Silence detection</li>
+</ul>
+<h3 id="phase-3-advanced-features" class="tsd-anchor-link">Phase 3: Advanced Features<a href="#phase-3-advanced-features" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li>[x] Automatic cleanup by settings</li>
+<li>[x] Export logs</li>
+<li>[x] PWA (Progressive Web App) support</li>
+<li>[x] Modular architecture with plugins</li>
+</ul>
+<h3 id="phase-4-extended-capabilities" class="tsd-anchor-link">Phase 4: Extended Capabilities<a href="#phase-4-extended-capabilities" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul>
+<li>[ ] Advanced audio editing capabilities</li>
+<li>[ ] Cloud storage integration (optional)</li>
+<li>[ ] Multi-user support</li>
+<li>[ ] Collaboration features</li>
+</ul>
+<h2 id="changelog" class="tsd-anchor-link">Changelog<a href="#changelog" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Detailed changes for each release are documented in the <a href="media/VERSIONS.md">VERSIONS.md</a> file.</p>
+<h2 id="testing" class="tsd-anchor-link">Testing<a href="#testing" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>The project includes comprehensive tests for quality assurance:</p>
+<ul>
+<li><strong>Unit tests</strong>: Test individual components and functions</li>
+<li><strong>Integration tests</strong>: Test interaction between modules</li>
+<li><strong>UI tests</strong>: Test correct operation of accordions and controls</li>
+<li><strong>Performance tests</strong>: Test efficiency of real-time audio processing</li>
+</ul>
+<p>To run tests:</p>
+<pre><code class="bash"><span class="hl-7"># Run all tests</span><br/><span class="hl-8">npm</span><span class="hl-1"> </span><span class="hl-9">run</span><span class="hl-1"> </span><span class="hl-9">test</span><br/><br/><span class="hl-7"># Run tests with code coverage</span><br/><span class="hl-8">npm</span><span class="hl-1"> </span><span class="hl-9">run</span><span class="hl-1"> </span><span class="hl-9">test:coverage</span><br/><br/><span class="hl-7"># Run tests in watch mode</span><br/><span class="hl-8">npm</span><span class="hl-1"> </span><span class="hl-9">run</span><span class="hl-1"> </span><span class="hl-9">test:watch</span><br/><br/><span class="hl-7"># Run specific test file</span><br/><span class="hl-8">npm</span><span class="hl-1"> </span><span class="hl-9">run</span><span class="hl-1"> </span><span class="hl-9">test</span><span class="hl-1"> </span><span class="hl-10">--</span><span class="hl-1"> </span><span class="hl-9">path/to/test-file.spec.ts</span>
+</code><button type="button">Copy</button></pre>
+
+<h4 id="test-structure" class="tsd-anchor-link">Test Structure<a href="#test-structure" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h4>
+<p>Tests are organized in the <code>tests/</code> directory with the following structure:</p>
+<ul>
+<li><code>unit/</code> - Unit tests for individual modules</li>
+<li><code>integration/</code> - Integration tests for module interactions</li>
+<li><code>ui/</code> - UI tests for interface components</li>
+<li><code>performance/</code> - Performance tests for audio processing</li>
+</ul>
+<h2 id="contributing" class="tsd-anchor-link">Contributing<a href="#contributing" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>Contributions are welcome! Please feel free to submit a Pull Request. For significant changes, please open an issue first to discuss what you would like to change.</p>
+<h3 id="how-to-contribute" class="tsd-anchor-link">How to Contribute<a href="#how-to-contribute" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ol>
+<li>Fork the repository</li>
+<li>Create a feature branch (<code>git checkout -b feature/amazing-feature</code>)</li>
+<li>Make your changes</li>
+<li>Commit your changes (<code>git commit -m 'Add amazing feature'</code>)</li>
+<li>Push to the branch (<code>git push origin feature/amazing-feature</code>)</li>
+<li>Open a Pull Request</li>
+</ol>
+<h3 id="reporting-bugs" class="tsd-anchor-link">Reporting Bugs<a href="#reporting-bugs" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>If you find a bug, please create an issue with:</p>
+<ul>
+<li>Clear description of the problem</li>
+<li>Steps to reproduce the issue</li>
+<li>Expected and actual behavior</li>
+<li>Browser and OS information</li>
+</ul>
+<h3 id="suggesting-enhancements" class="tsd-anchor-link">Suggesting Enhancements<a href="#suggesting-enhancements" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>For feature requests, please provide:</p>
+<ul>
+<li>Clear description of the enhancement</li>
+<li>Use cases for the feature</li>
+<li>Possible implementation approaches</li>
+</ul>
+<h3 id="code-style" class="tsd-anchor-link">Code Style<a href="#code-style" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>Please follow these guidelines when contributing code:</p>
+<ul>
+<li>Use consistent indentation (2 spaces for TypeScript/JavaScript)</li>
+<li>Write clear, descriptive variable and function names</li>
+<li>Add comments for complex logic</li>
+<li>Follow existing code patterns in the project</li>
+</ul>
+<h2 id="license" class="tsd-anchor-link">License<a href="#license" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>MIT License - see LICENSE file for details.</p>
+<h2 id="support" class="tsd-anchor-link">Support<a href="#support" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>For support, please open an issue in the repository or contact the developers.</p>
+<h2 id="authors" class="tsd-anchor-link">Authors<a href="#authors" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<ul>
+<li><strong>Oleg Zai</strong> - Initial work and main developer</li>
+</ul>
+<p>See also the list of <a href="https://github.com/olegzai/recorder/contributors">contributors</a> who participated in this project.</p>
+<h2 id="credits" class="tsd-anchor-link">Credits<a href="#credits" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<p>This project uses the following technologies and APIs:</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a> - For audio processing</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder">MediaRecorder API</a> - For audio capture</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition">Web Speech API</a> - For speech recognition</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API">IndexedDB</a> - For data storage</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob">Blob API</a> - For file operations</li>
+</ul>
+<h2 id="frequently-asked-questions-faq" class="tsd-anchor-link">Frequently Asked Questions (FAQ)<a href="#frequently-asked-questions-faq" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h2>
+<h3 id="how-to-use-this-faq" class="tsd-anchor-link">How to Use This FAQ<a href="#how-to-use-this-faq" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<p>This section addresses common questions about the Recorder application. If your question is not answered here, please check the <a href="#">documentation</a> or <a href="#support">contact us</a>.</p>
+<h3 id="general-questions" class="tsd-anchor-link">General Questions<a href="#general-questions" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ol>
+<li>
+<p><strong>What microphone access permissions does the application require?</strong></p>
+<p>The application requires microphone access permission to record audio. When you first click the record button, your browser will prompt you to allow microphone access. You must grant this permission for the application to function properly.</p>
+</li>
+<li>
+<p><strong>How does the application handle user refusal to grant microphone access?</strong></p>
+<p>If you refuse to grant microphone access, the application will display an error message and continue working with limited functionality. You won't be able to record audio, but you can still view existing recordings and adjust settings.</p>
+</li>
+<li>
+<p><strong>What camera access permissions does the application require?</strong></p>
+<p>The application does not require camera access. It only uses the microphone for audio recording functionality.</p>
+</li>
+</ol>
+<h3 id="functionality" class="tsd-anchor-link">Functionality<a href="#functionality" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ol start="4">
+<li>
+<p><strong>What audio formats are supported for export?</strong></p>
+<p>The application supports exporting recordings in multiple formats including WAV, MP3, OGG, and WebM. You can select your preferred format in the settings panel.</p>
+</li>
+<li>
+<p><strong>How does the application handle situations when there is little free space on the device?</strong></p>
+<p>The application monitors available storage space and will warn you if storage is running low. You can configure automatic cleanup settings to remove older recordings and free up space.</p>
+</li>
+<li>
+<p><strong>Can hotkeys be configured for recording management?</strong></p>
+<p>Hotkey functionality is not currently available but is planned for future versions. The current interface relies on clicking buttons for recording controls.</p>
+</li>
+<li>
+<p><strong>Are plugins or extensions supported for additional functions?</strong></p>
+<p>Yes, all major modules (recording, transcription, translation, history, settings, etc.) are implemented as plugins and can be enabled or disabled in the settings panel.</p>
+</li>
+</ol>
+<h3 id="user-interface" class="tsd-anchor-link">User Interface<a href="#user-interface" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ol start="8">
+<li>
+<p><strong>What interface languages are supported?</strong></p>
+<p>The application currently supports English and Russian interfaces. Multilingual support for additional languages is planned for future releases.</p>
+</li>
+<li>
+<p><strong>Can the interface appearance be customized?</strong></p>
+<p>Yes, the application offers both dark and light theme options. You can switch between themes in the settings panel.</p>
+</li>
+<li>
+<p><strong>What screen sizes are supported?</strong></p>
+<p>The application is responsive and adapts to all screen sizes, from mobile phones to desktop monitors, ensuring optimal viewing and usability across devices.</p>
+</li>
+</ol>
+<h3 id="technical-questions" class="tsd-anchor-link">Technical Questions<a href="#technical-questions" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ol start="11">
+<li>
+<p><strong>What are the minimum system requirements for the application?</strong></p>
+<p>The application should work on any device with a modern browser that supports Web APIs (Web Audio API, MediaRecorder API, Web Speech API). Most devices manufactured in the last 5 years meet these requirements.</p>
+</li>
+<li>
+<p><strong>How does the application handle failures during recording?</strong></p>
+<p>The application implements error handling mechanisms to save partially recorded audio in case of unexpected interruptions. A recovery mechanism attempts to restore the recording session when possible.</p>
+</li>
+<li>
+<p><strong>Is simultaneous use of multiple microphones supported?</strong></p>
+<p>No, the application currently supports only one microphone at a time. Using multiple microphones simultaneously is not supported.</p>
+</li>
+</ol>
+<h3 id="security-and-privacy-1" class="tsd-anchor-link">Security and Privacy<a href="#security-and-privacy-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ol start="14">
+<li>
+<p><strong>What data is transmitted to external servers?</strong></p>
+<p>Audio recordings remain on your device and are not transmitted to external servers. However, transcription and translation services require sending text data to external APIs when these features are used.</p>
+</li>
+<li>
+<p><strong>How often is the application updated?</strong></p>
+<p>Updates are released periodically as new features are added or bugs are fixed. The application will notify you when a new version is available.</p>
+</li>
+<li>
+<p><strong>What precautions are taken when working with confidential recordings?</strong></p>
+<p>All recordings are stored locally on your device using secure storage mechanisms (localStorage and IndexedDB). No audio data is transmitted to external servers unless you specifically use online transcription or translation services.</p>
+</li>
+</ol>
+<h3 id="usability" class="tsd-anchor-link">Usability<a href="#usability" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ol start="17">
+<li>
+<p><strong>How can a user get help or support?</strong></p>
+<p>Help is available through the &quot;Help&quot; accordion in the application interface and through the documentation provided in this README file. You can also open an issue in the GitHub repository for additional support.</p>
+</li>
+<li>
+<p><strong>Are notifications about process completion supported?</strong></p>
+<p>Process completion notifications are not currently available but are planned for future versions. Audio notifications for various events are also under consideration.</p>
+</li>
+<li>
+<p><strong>How can a user evaluate recording quality?</strong></p>
+<p>The application provides several ways to evaluate recording quality:</p>
+<ul>
+<li>Visual sound level indicator during recording</li>
+<li>Immediate playback of recordings</li>
+<li>Quality and performance statistics in the log panel</li>
+</ul>
+<p>These modules can be disabled as plugins in settings if not needed.</p>
+</li>
+<li>
+<p><strong>Can automatic cleanup of recordings be configured?</strong></p>
+<p>Yes, you can configure automatic cleanup of recordings by date in the storage settings. Options include keeping recordings forever, deleting after 7, 30, or 90 days, or performing a full cleanup.</p>
+</li>
+</ol>
+<h3 id="architecture-1" class="tsd-anchor-link">Architecture<a href="#architecture-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ol start="21">
+<li>
+<p><strong>How are modules implemented and managed in the application?</strong></p>
+<p>All modules (recording, transcription, translation, history, settings, etc.) are implemented as plugins and can be enabled or disabled in the settings panel. This modular architecture allows for customization of functionality based on user needs.</p>
+</li>
+</ol>
+</div></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="assets/icons.svg#icon-chevronDown"></use></svg><h3>On This Page</h3></summary><div class="tsd-accordion-details"><a href="#recorder"><span>Recorder</span></a><ul><li><a href="#table-of-contents"><span>Table of <wbr/>Contents</span></a></li><li><a href="#overview"><span>Overview</span></a></li><li><a href="#features"><span>Features</span></a></li><li><a href="#tech-stack"><span>Tech <wbr/>Stack</span></a></li><li><a href="#architecture"><span>Architecture</span></a></li><li><ul><li><a href="#project-structure"><span>Project <wbr/>Structure</span></a></li><li><a href="#module-architecture"><span>Module <wbr/>Architecture</span></a></li><li><a href="#data-flow"><span>Data <wbr/>Flow</span></a></li><li><a href="#plugin-system-architecture"><span>Plugin <wbr/>System <wbr/>Architecture</span></a></li></ul></li><li><a href="#interface"><span>Interface</span></a></li><li><ul><li><a href="#1-recorder"><span>1. <wbr/>Recorder</span></a></li><li><a href="#2-history"><span>2. <wbr/>History</span></a></li><li><a href="#3-settings"><span>3. <wbr/>Settings</span></a></li><li><a href="#4-plugins"><span>4. <wbr/>Plugins</span></a></li><li><a href="#5-help"><span>5. <wbr/>Help</span></a></li><li><a href="#6-log"><span>6. <wbr/>Log</span></a></li></ul></li><li><a href="#getting-started"><span>Getting <wbr/>Started</span></a></li><li><ul><li><a href="#prerequisites"><span>Prerequisites</span></a></li><li><a href="#installation"><span>Installation</span></a></li><li><a href="#development"><span>Development</span></a></li><li><ul><li><a href="#local-setup"><span>Local <wbr/>Setup</span></a></li></ul></li><li><a href="#building-the-project"><span>Building the <wbr/>Project</span></a></li><li><a href="#usage"><span>Usage</span></a></li><li><ul><li><a href="#quick-start-guide"><span>Quick <wbr/>Start <wbr/>Guide</span></a></li><li><a href="#tips-for-best-quality"><span>Tips for <wbr/>Best <wbr/>Quality</span></a></li></ul></li></ul></li><li><a href="#api-reference"><span>API <wbr/>Reference</span></a></li><li><ul><li><a href="#recording-functions"><span>Recording <wbr/>Functions</span></a></li><li><a href="#transcription-and-translation-functions"><span>Transcription and <wbr/>Translation <wbr/>Functions</span></a></li><li><a href="#plugin-management-functions"><span>Plugin <wbr/>Management <wbr/>Functions</span></a></li><li><a href="#configuration-parameters"><span>Configuration <wbr/>Parameters</span></a></li><li><a href="#usage-examples"><span>Usage <wbr/>Examples</span></a></li><li><ul><li><a href="#basic-recording"><span>Basic <wbr/>Recording</span></a></li><li><a href="#transcription"><span>Transcription</span></a></li><li><a href="#plugin-management"><span>Plugin <wbr/>Management</span></a></li></ul></li></ul></li><li><a href="#browser-support"><span>Browser <wbr/>Support</span></a></li><li><ul><li><a href="#desktop-browsers"><span>Desktop <wbr/>Browsers</span></a></li><li><a href="#mobile-browsers"><span>Mobile <wbr/>Browsers</span></a></li><li><a href="#feature-support-matrix"><span>Feature <wbr/>Support <wbr/>Matrix</span></a></li></ul></li><li><a href="#security-and-privacy"><span>Security and <wbr/>Privacy</span></a></li><li><a href="#limitations"><span>Limitations</span></a></li><li><a href="#configuration"><span>Configuration</span></a></li><li><ul><li><a href="#configuration-options-explained"><span>Configuration <wbr/>Options <wbr/>Explained</span></a></li><li><ul><li><a href="#sample-rate"><span>Sample <wbr/>Rate</span></a></li><li><a href="#bitrate"><span>Bitrate</span></a></li><li><a href="#audio-formats"><span>Audio <wbr/>Formats</span></a></li></ul></li></ul></li><li><a href="#performance"><span>Performance</span></a></li><li><ul><li><a href="#performance-metrics"><span>Performance <wbr/>Metrics</span></a></li><li><ul><li><a href="#memory-usage"><span>Memory <wbr/>Usage</span></a></li><li><a href="#processing-time"><span>Processing <wbr/>Time</span></a></li><li><a href="#supported-recording-lengths"><span>Supported <wbr/>Recording <wbr/>Lengths</span></a></li></ul></li><li><a href="#performance-optimization-tips"><span>Performance <wbr/>Optimization <wbr/>Tips</span></a></li></ul></li><li><a href="#troubleshooting"><span>Troubleshooting</span></a></li><li><ul><li><a href="#common-issues"><span>Common <wbr/>Issues</span></a></li><li><a href="#browser-specific-issues"><span>Browser-<wbr/>Specific <wbr/>Issues</span></a></li><li><ul><li><a href="#chrome"><span>Chrome</span></a></li><li><a href="#firefox"><span>Firefox</span></a></li><li><a href="#safari"><span>Safari</span></a></li></ul></li><li><a href="#advanced-troubleshooting"><span>Advanced <wbr/>Troubleshooting</span></a></li><li><ul><li><a href="#debugging"><span>Debugging</span></a></li><li><a href="#diagnostic-information"><span>Diagnostic <wbr/>Information</span></a></li></ul></li><li><a href="#when-to-report-issues"><span>When to <wbr/>Report <wbr/>Issues</span></a></li></ul></li><li><a href="#development-roadmap"><span>Development <wbr/>Roadmap</span></a></li><li><ul><li><a href="#phase-1-core-functionality"><span>Phase 1: <wbr/>Core <wbr/>Functionality</span></a></li><li><a href="#phase-2-processing-features"><span>Phase 2: <wbr/>Processing <wbr/>Features</span></a></li><li><a href="#phase-3-advanced-features"><span>Phase 3: <wbr/>Advanced <wbr/>Features</span></a></li><li><a href="#phase-4-extended-capabilities"><span>Phase 4: <wbr/>Extended <wbr/>Capabilities</span></a></li></ul></li><li><a href="#changelog"><span>Changelog</span></a></li><li><a href="#testing"><span>Testing</span></a></li><li><ul><li><ul><li><a href="#test-structure"><span>Test <wbr/>Structure</span></a></li></ul></li></ul></li><li><a href="#contributing"><span>Contributing</span></a></li><li><ul><li><a href="#how-to-contribute"><span>How to <wbr/>Contribute</span></a></li><li><a href="#reporting-bugs"><span>Reporting <wbr/>Bugs</span></a></li><li><a href="#suggesting-enhancements"><span>Suggesting <wbr/>Enhancements</span></a></li><li><a href="#code-style"><span>Code <wbr/>Style</span></a></li></ul></li><li><a href="#license"><span>License</span></a></li><li><a href="#support"><span>Support</span></a></li><li><a href="#authors"><span>Authors</span></a></li><li><a href="#credits"><span>Credits</span></a></li><li><a href="#frequently-asked-questions-faq"><span>Frequently <wbr/>Asked <wbr/>Questions (<wbr/>FAQ)</span></a></li><li><ul><li><a href="#how-to-use-this-faq"><span>How to <wbr/>Use <wbr/>This <wbr/>FAQ</span></a></li><li><a href="#general-questions"><span>General <wbr/>Questions</span></a></li><li><a href="#functionality"><span>Functionality</span></a></li><li><a href="#user-interface"><span>User <wbr/>Interface</span></a></li><li><a href="#technical-questions"><span>Technical <wbr/>Questions</span></a></li><li><a href="#security-and-privacy-1"><span>Security and <wbr/>Privacy</span></a></li><li><a href="#usability"><span>Usability</span></a></li><li><a href="#architecture-1"><span>Architecture</span></a></li></ul></li></ul></div></details></div><div class="site-menu"><nav class="tsd-navigation"><a href="modules.html">Recorder Application - v0.0.1</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>
