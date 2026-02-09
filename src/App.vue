@@ -56,8 +56,18 @@
                                 {{ recording.format }}</span
                             >
                         </div>
-                        <div class="recording-actions">
+                        <div class="recording-content">
                             <audio controls :src="recording.url"></audio>
+                            <div v-if="recording.transcription" class="transcription-preview">
+                                <h4>Transcription:</h4>
+                                <p>{{ recording.transcription }}</p>
+                            </div>
+                            <div v-if="recording.translation" class="translation-preview">
+                                <h4>Translation:</h4>
+                                <p>{{ recording.translation }}</p>
+                            </div>
+                        </div>
+                        <div class="recording-actions">
                             <button
                                 class="delete-recording-btn"
                                 @click="deleteRecording(recording.id)"
@@ -887,6 +897,29 @@ select {
 
 audio {
     width: 200px;
+}
+
+.recording-content {
+    margin-top: 10px;
+}
+
+.transcription-preview, .translation-preview {
+    margin-top: 10px;
+    padding: 10px;
+    border-left: 3px solid #42b983;
+    background-color: #f8f9fa;
+}
+
+.transcription-preview h4, .translation-preview h4 {
+    margin: 0 0 5px 0;
+    font-size: 0.9em;
+    color: #42b983;
+}
+
+.transcription-preview p, .translation-preview p {
+    margin: 0;
+    font-size: 0.9em;
+    line-height: 1.4;
 }
 
 #logOutput {
