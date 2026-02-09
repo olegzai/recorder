@@ -236,8 +236,35 @@ class TranscriptionModule {
         // For demonstration purposes, we'll return English
         // In a real implementation, this would analyze the actual audio
         appLogger.info('Language detection completed (simulated)');
+        
+        // In a real implementation, we would analyze the audio to detect
+        // specific phonetic characteristics of Russian and Ukrainian
+        // For now, we'll return English as default, but this can be enhanced
+        // to better detect Russian and Ukrainian based on acoustic features
         resolve('en');
       }, 1000);
+    });
+  }
+
+  /**
+   * Enhanced language detection that considers Russian and Ukrainian characteristics
+   * This is a placeholder for a more sophisticated implementation
+   */
+  async detectLanguageAdvanced(audioBlob: Blob): Promise<LanguageCode> {
+    appLogger.info('Attempting advanced language detection');
+    
+    // In a real implementation, we would analyze the audio content
+    // to identify specific phonetic characteristics of Russian and Ukrainian
+    // such as specific consonant clusters, vowel reductions, etc.
+    
+    return new Promise((resolve) => {
+      // For now, we'll return English as default
+      // In a real implementation, we would use ML models trained to detect
+      // Russian and Ukrainian based on their distinctive acoustic features
+      setTimeout(() => {
+        appLogger.info('Advanced language detection completed (simulated)');
+        resolve('en'); // Default to English until we have actual detection
+      }, 1500);
     });
   }
 
