@@ -4,38 +4,14 @@
         <details id="recorder-accordion" open>
             <summary>Recorder</summary>
             <div class="recorder-controls">
-                <button id="recordBtn" @click="startRecording">Record</button>
-                <button
-                    id="stopBtn"
-                    @click="stopRecording"
-                    :disabled="!isRecording"
+                <button 
+                    id="recordBtn" 
+                    @click="toggleRecording"
+                    :class="{ 'recording-active': isRecording }"
                 >
-                    Stop
+                    {{ isRecording ? 'Stop Recording' : 'Start Recording' }}
                 </button>
                 <div id="recorderStatus">{{ status }}</div>
-                <div id="voiceTranscriptionControls">
-                    <button
-                        id="transcribeBtn"
-                        @click="transcribeAudio"
-                        :disabled="!currentRecording"
-                    >
-                        Transcribe
-                    </button>
-                    <button
-                        id="translateBtn"
-                        @click="translateText"
-                        :disabled="!transcription"
-                    >
-                        Translate
-                    </button>
-                    <button
-                        id="voiceoverBtn"
-                        @click="playVoiceover"
-                        :disabled="!translation"
-                    >
-                        Voiceover
-                    </button>
-                </div>
             </div>
         </details>
 
@@ -340,6 +316,14 @@ const log = (message: string, level: 'info' | 'warn' | 'error' = 'info') => {
     case 'error':
       appLogger.error(message);
       break;
+  }
+};
+
+const toggleRecording = async () => {
+  if (isRecording.value) {
+    await stopRecording();
+  } else {
+    await startRecording();
   }
 };
 
@@ -939,5 +923,14 @@ audio {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
+}
+
+#recordBtn.recording-active {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+#recordBtn.recording-active:hover {
+    background-color: #c82333;
 }
 </style>
