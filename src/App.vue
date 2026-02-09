@@ -134,6 +134,26 @@
             </div>
         </details>
 
+        <details id="transcription-accordion">
+            <summary>Transcription</summary>
+            <div class="transcription-panel">
+                <div class="transcription-controls">
+                    <button id="startTranscriptionBtn" @click="startRealTimeTranscription" :disabled="isTranscribing">Start Transcription</button>
+                    <button id="stopTranscriptionBtn" @click="stopTranscription" :disabled="!isTranscribing">Stop Transcription</button>
+                    <div id="transcriptionStatus">{{ transcriptionStatus }}</div>
+                </div>
+                <div class="transcription-display">
+                    <textarea 
+                        id="transcriptionOutput" 
+                        v-model="transcription" 
+                        placeholder="Transcription will appear here..."
+                        rows="6"
+                        readonly
+                    ></textarea>
+                </div>
+            </div>
+        </details>
+
         <details id="plugins-accordion">
             <summary>Plugins</summary>
             <div class="plugins-panel">
@@ -238,6 +258,8 @@ const currentRecording = ref<Blob | null>(null);
 const currentStream = ref<MediaStream | null>(null);
 const transcription = ref('');
 const translation = ref('');
+const isTranscribing = ref(false);
+const transcriptionStatus = ref('Ready for transcription');
 
 // Список записей
 const recordings = ref<Recording[]>([]);
@@ -455,6 +477,68 @@ const transcribeAudio = async () => {
     log('Transcription initiated');
   } catch (error) {
     log(`Transcription failed: ${(error as Error).message}`, 'error');
+  }
+};
+
+const startRealTimeTranscription = async () => {
+  try {
+    log('Starting real-time transcription...', 'info');
+    
+    if (!transcriptionModule.isAvailable()) {
+      log('Web Speech API not supported in this browser', 'error');
+      transcriptionStatus.value = 'Web Speech API not supported';
+      return;
+    }
+
+    // Set up callbacks for real-time transcription results
+    transcriptionModule.setCallbacks({
+      onResult: (result) => {
+        // Append new results to existing transcription
+        transcription.value += result.text + ' ';
+        log(`Real-time transcription result: ${result.text.substring(0, 50)}...`);
+      },
+      onError: (error) => {
+        log(`Real-time transcription error: ${error.message}`, 'error');
+        transcriptionStatus.value = `Error: ${error.message}`;
+      },
+      onStart: () => {
+        isTranscribing.value = true;
+        transcriptionStatus.value = 'Transcribing...';
+        log('Real-time transcription started', 'info');
+      },
+      onStop: () => {
+        isTranscribing.value = false;
+        transcriptionStatus.value = 'Transcription stopped';
+        log('Real-time transcription stopped', 'info');
+      },
+    });
+
+    // Determine language from settings
+    const language = settings.value.transcriptionLang as LanguageCode;
+
+    // Start real-time transcription
+    await transcriptionModule.startTranscription({
+      language: language,
+      interimResults: true,
+      continuous: true, // Keep listening continuously
+    });
+
+    log('Real-time transcription initiated');
+  } catch (error) {
+    log(`Real-time transcription failed: ${(error as Error).message}`, 'error');
+    transcriptionStatus.value = `Failed: ${(error as Error).message}`;
+  }
+};
+
+const stopTranscription = () => {
+  try {
+    log('Stopping real-time transcription...', 'info');
+    transcriptionModule.stopTranscription();
+    isTranscribing.value = false;
+    transcriptionStatus.value = 'Transcription stopped';
+  } catch (error) {
+    log(`Failed to stop transcription: ${(error as Error).message}`, 'error');
+    transcriptionStatus.value = `Stop error: ${(error as Error).message}`;
   }
 };
 

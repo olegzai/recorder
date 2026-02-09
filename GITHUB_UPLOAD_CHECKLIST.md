@@ -29,7 +29,7 @@ This checklist shows all files and directories in the project. Check the boxes f
 
 ## Documentation Files
 - [x] `README.md` - Main project documentation
-- [x] `README_RU.md` - Russian version of README
+- [ ] `README_RU.md` - Russian version of README
 - [x] `VERSIONS.md` - Version history
 - [x] `VERSION_0_0_1_RELEASE_NOTES.md` - Release notes
 - [x] `AGENTS.md` - Agent documentation

@@ -6,7 +6,9 @@
 [![TypeScript](https://img.shields.io/badge/Made%20with-TypeScript-007ACC.svg)](https://www.typescriptlang.org/)
 [![Web API](https://img.shields.io/badge/WebAPI-Compatible-FF69B4.svg)](https://developer.mozilla.org/en-US/docs/Web/API)
 
-CSS-free, pure HTML+TypeScript+JavaScript browser-based audio recorder without a server, which works entirely in the browser without any backend dependencies. Includes speech transcription and translation features.
+**MADE IN UKRAINE** 🇺🇦
+
+CSS-free, pure HTML+TypeScript+JavaScript browser-based audio recorder without a server, which works entirely in the browser without any backend dependencies. Includes speech transcription and translation features. Supporting English, Ukrainian, and Russian languages.
 
 ## Table of Contents
 
@@ -87,6 +89,7 @@ Recorder is a lightweight, standalone sound recording solution that uses modern 
 - **Cross-Platform Compatibility**: Works in all modern browsers supporting Web Audio (desktop and mobile)
 - **Lightweight**: Minimal code footprint without external dependencies
 - **Export Options**: Save recordings in multiple formats (WAV, MP3, OGG, WebM)
+- **Multilingual Support**: Full support for English, Ukrainian, and Russian languages throughout the application
 - **Transcription**: Ability to convert speech to text in Russian, English, and Ukrainian (fully implemented)
 - **Translation**: Function to translate transcribed text into different languages (placeholder implementation)
 - **Comprehensive Logging**: All application processes are logged for diagnostics
@@ -252,8 +255,8 @@ Recordings are stored using a hybrid approach: audio data is stored in IndexedDB
     <label>Sample Rate: <input type="number" id="sampleRate" value="44100"></label>
     <label>Bitrate: <input type="number" id="bitrate" value="128000"></label>
     <label>Format: <select id="audioFormat"><option value="wav">WAV</option><option value="mp3">MP3</option><option value="ogg">OGG</option></select></label>
-    <label>Transcription Language: <select id="transcriptionLang"><option value="ru">Russian</option><option value="en">English</option></select></label>
-    <label>Translation Language: <select id="translationLang"><option value="en">English</option><option value="ru">Russian</option><option value="de">German</option><option value="fr">French</option><option value="es">Spanish</option></select></label>
+    <label>Transcription Language: <select id="transcriptionLang"><option value="ru">Russian</option><option value="en">English</option><option value="uk">Ukrainian</option></select></label>
+    <label>Translation Language: <select id="translationLang"><option value="en">English</option><option value="ru">Russian</option><option value="uk">Ukrainian</option><option value="de">German</option><option value="fr">French</option><option value="es">Spanish</option></select></label>
     <label>Retention Period: <select id="retentionPeriod"><option value="never">Never delete</option><option value="7">7 days</option><option value="30">30 days</option><option value="90">90 days</option><option value="clear">Full cleanup</option></select></label>
   </div>
 </details>
@@ -532,7 +535,7 @@ The application can be configured through the settings interface:
 - **Sample Rate**: from 8000 Hz to 96000 Hz (default 44100 Hz)
 - **Bitrate**: from 64 kbps to 320 kbps (default 128 kbps)
 - **Audio Format**: WAV, MP3, OGG and other supported formats
-- **Languages**: Russian and English support for transcription, more than 20 languages for translation
+- **Languages**: Full support for English, Ukrainian, and Russian for transcription, with more than 20 languages for translation
 - **Retention Period**: configure automatic cleanup of recordings by date
 
 ### Configuration Options Explained
@@ -666,30 +669,70 @@ Detailed versioning plan and development stages are described in the [VERSIONS.m
 
 Development proceeds using modular architecture where each functional block is implemented as an independent module, which is then integrated into the final build.
 
-### Phase 1: Core Functionality
-- [x] Basic audio recording function
-- [x] Playback of recordings in interface
-- [x] Adding metadata to recordings
+### v0.0.1: Core Recording & History
+- [ ] Modern architecture with Vue 3, Vite, TypeScript
+- [ ] Core audio recording functionality
+- [ ] AudioModule for recording/playback
+- [ ] StorageModule for IndexedDB/localStorage management
+- [ ] Comprehensive recording history with metadata
+- [ ] LoggerModule for comprehensive application logging
+- [ ] Single HTML file output
+- [ ] Accordion interface as specified
+- [ ] Plugin system for modular functionality
+- [ ] Automatic cleanup by settings
+- [ ] Export logs functionality
+- [ ] Multilingual support (English, Ukrainian, Russian)
+- [ ] Interface language switching capability
+- [ ] Light/Dark theme toggle
 
-### Phase 2: Processing Features
-- [x] Speech transcription (Russian and English)
-- [x] Translation to different languages
-- [x] Voiceover of translated text
-- [x] Silence detection
+### v0.0.2: Transcription Features
+- [ ] Speech transcription (Russian, English, Ukrainian) using Web Speech API
+- [ ] Real-time transcription capability
+- [ ] TranscriptionModule using Web Speech API
+- [ ] Language detection for transcription
+- [ ] Manual language selection for transcription
 
-### Phase 3: Advanced Features
-- [x] Automatic cleanup by settings
-- [x] Export logs
-- [x] PWA (Progressive Web App) support
-- [x] Modular architecture with plugins
+### v0.1.0: Translation Features
+- [ ] Translation of transcribed text to different languages
+- [ ] TranslationModule with API integration
+- [ ] Automatic translation of phrases/messages
+- [ ] Support for multiple target languages
+- [ ] Translation history and caching
 
-### Phase 4: Extended Capabilities
+### v0.2.0: Voiceover Features
+- [ ] Text-to-speech functionality for translated text
+- [ ] VoiceoverModule with TTS engine
+- [ ] Voiceover in Russian and English
+- [ ] Adjustable voice parameters (speed, pitch)
+- [ ] Synchronized voiceover with text
+
+### v1.0.0: Advanced Features
+- [ ] PWA (Progressive Web App) support
+- [ ] Automatic cleanup by settings
+- [ ] Export logs functionality
+- [ ] Modular architecture with plugins
+
+### v1.1.0: Extended Capabilities
 - [ ] Advanced audio editing capabilities
 - [ ] Cloud storage integration (optional)
 - [ ] Multi-user support
 - [ ] Collaboration features
 
-### Phase 5: Audio Intelligence
+### v1.2.0: Audio Intelligence Features
+- [ ] Audio classification module using TensorFlow.js
+- [ ] Voice activity detection using Picovoice Cobra
+- [ ] Audio fingerprinting for sound identification
+- [ ] Real-time sound recognition (voice, silence, birds, dogs, city noise, waterfall)
+- [ ] Audio processing enhancements with Howler.js
+- [ ] Noise suppression and audio quality improvements
+
+### Phase 5: Extended Capabilities
+- [ ] Advanced audio editing capabilities
+- [ ] Cloud storage integration (optional)
+- [ ] Multi-user support
+- [ ] Collaboration features
+
+### Phase 6: Audio Intelligence
 - [ ] Audio classification module using TensorFlow.js
 - [ ] Voice activity detection using Picovoice Cobra
 - [ ] Audio fingerprinting for sound identification

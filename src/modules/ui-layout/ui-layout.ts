@@ -9,6 +9,10 @@ export class UILayoutModule {
     transcribeBtn?: HTMLButtonElement;
     translateBtn?: HTMLButtonElement;
     voiceoverBtn?: HTMLButtonElement;
+    startTranscriptionBtn?: HTMLButtonElement;
+    stopTranscriptionBtn?: HTMLButtonElement;
+    transcriptionStatus?: HTMLElement;
+    transcriptionOutput?: HTMLTextAreaElement;
     recorderStatus?: HTMLElement;
     recordingsList?: HTMLUListElement;
     sampleRateInput?: HTMLInputElement;
@@ -124,6 +128,25 @@ export class UILayoutModule {
           </div>
         </details>
 
+        <details id="transcription-accordion">
+          <summary>Transcription</summary>
+          <div class="transcription-panel">
+            <div class="transcription-controls">
+              <button id="startTranscriptionBtn">Start Transcription</button>
+              <button id="stopTranscriptionBtn">Stop Transcription</button>
+              <div id="transcriptionStatus">Ready for transcription</div>
+            </div>
+            <div class="transcription-display">
+              <textarea 
+                id="transcriptionOutput" 
+                placeholder="Transcription will appear here..."
+                rows="6"
+                readonly
+              ></textarea>
+            </div>
+          </div>
+        </details>
+
         <details id="plugins-accordion">
           <summary>Plugins</summary>
           <div class="plugins-panel">
@@ -176,6 +199,18 @@ export class UILayoutModule {
     this.elements.voiceoverBtn = document.getElementById(
       'voiceoverBtn',
     ) as HTMLButtonElement;
+    this.elements.startTranscriptionBtn = document.getElementById(
+      'startTranscriptionBtn',
+    ) as HTMLButtonElement;
+    this.elements.stopTranscriptionBtn = document.getElementById(
+      'stopTranscriptionBtn',
+    ) as HTMLButtonElement;
+    this.elements.transcriptionStatus = document.getElementById(
+      'transcriptionStatus',
+    ) as HTMLElement;
+    this.elements.transcriptionOutput = document.getElementById(
+      'transcriptionOutput',
+    ) as HTMLTextAreaElement;
     this.elements.recorderStatus = document.getElementById(
       'recorderStatus',
     ) as HTMLElement;
@@ -419,6 +454,18 @@ export class UILayoutModule {
         // This will be handled by the main application
       };
     }
+
+    if (this.elements.startTranscriptionBtn) {
+      this.elements.startTranscriptionBtn.onclick = () => {
+        // This will be handled by the main application
+      };
+    }
+
+    if (this.elements.stopTranscriptionBtn) {
+      this.elements.stopTranscriptionBtn.onclick = () => {
+        // This will be handled by the main application
+      };
+    }
   }
 
   /**
@@ -436,6 +483,7 @@ export class UILayoutModule {
       'recorder-accordion': this.container?.querySelector(
         '#recorder-accordion',
       ),
+      'transcription-accordion': this.container?.querySelector('#transcription-accordion'),
       'history-accordion': this.container?.querySelector('#history-accordion'),
       'settings-accordion': this.container?.querySelector(
         '#settings-accordion',
@@ -448,6 +496,11 @@ export class UILayoutModule {
     if (accordions['recorder-accordion']) {
       (accordions['recorder-accordion'] as HTMLElement).style.display =
         plugins.recorderEnabled ? 'block' : 'none';
+    }
+
+    if (accordions['transcription-accordion']) {
+      (accordions['transcription-accordion'] as HTMLElement).style.display =
+        plugins.transcriptionEnabled ? 'block' : 'none';
     }
 
     if (accordions['history-accordion']) {

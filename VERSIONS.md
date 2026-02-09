@@ -1,92 +1,129 @@
 # Version History
 
-## v0.0.1 (Initial Vue/Vite Release) - Completed
+## v0.0.1 (Core Recording & History with Full Multilingual Support) - Planned
 - Modern architecture with Vue 3, Vite, TypeScript
 - Core audio recording functionality
 - AudioModule for recording/playback
 - StorageModule for IndexedDB/localStorage management
-- TranscriptionModule using Web Speech API
+- Comprehensive recording history with metadata
 - LoggerModule for comprehensive application logging
 - Single HTML file output
 - Accordion interface as specified
 - Plugin system for modular functionality
 - Automatic cleanup by settings
 - Export logs functionality
+- Full multilingual support (English, Ukrainian, Russian) throughout the application
+- Interface language switching capability
+- Light/Dark theme toggle
 
-## v1.0.0 (Initial Release) - Planned
-- Core functionality implemented
-- Basic audio recording function
-- Playback of recordings in interface
-- Adding metadata to recordings
+## v0.0.2 (Transcription Features with Multilingual Support) - Planned
+- Speech transcription (Russian, English, Ukrainian) using Web Speech API
+- Real-time transcription capability
+- TranscriptionModule using Web Speech API
+- Language detection for transcription
+- Manual language selection for transcription
+- Continued support for English, Ukrainian, and Russian throughout the application
 
-## v1.1.0 (Processing Features) - Planned
-- Speech transcription (Russian and English)
-- Translation to different languages
-- Voiceover of translated text
-- Silence detection
+## v0.1.0 (Translation Features with Multilingual Support) - Planned
+- Translation of transcribed text to different languages
+- TranslationModule with API integration
+- Automatic translation of phrases/messages
+- Support for multiple target languages
+- Translation history and caching
+- Continued support for English, Ukrainian, and Russian throughout the application
 
-## v1.2.0 (Advanced Features) - Planned
-- Automatic cleanup by settings
-- Export logs
+## v0.2.0 (Voiceover Features with Multilingual Support) - Planned
+- Text-to-speech functionality for translated text
+- VoiceoverModule with TTS engine
+- Voiceover in Russian and English
+- Adjustable voice parameters (speed, pitch)
+- Synchronized voiceover with text
+- Continued support for English, Ukrainian, and Russian throughout the application
+
+## v1.0.0 (Advanced Features with Multilingual Support) - Planned
 - PWA (Progressive Web App) support
+- Automatic cleanup by settings
+- Export logs functionality
 - Modular architecture with plugins
+- Continued support for English, Ukrainian, and Russian throughout the application
 
-## v1.3.0 (Extended Capabilities) - Planned
+## v1.1.0 (Extended Capabilities with Multilingual Support) - Planned
 - Advanced audio editing capabilities
 - Cloud storage integration (optional)
 - Multi-user support
 - Collaboration features
+- Continued support for English, Ukrainian, and Russian throughout the application
 
-## v1.4.0 (Audio Intelligence Features) - Planned
+## v1.2.0 (Audio Intelligence Features with Multilingual Support) - Planned
 - Audio classification module using TensorFlow.js
 - Voice activity detection using Picovoice Cobra
 - Audio fingerprinting for sound identification
 - Real-time sound recognition (voice, silence, birds, dogs, city noise, waterfall)
 - Audio processing enhancements with Howler.js
 - Noise suppression and audio quality improvements
+- Continued support for English, Ukrainian, and Russian throughout the application
 
 # Development Phases
 
-## Phase 0: Modern Architecture (Completed)
-- [x] Vue 3 with Composition API
-- [x] Vite build system
-- [x] TypeScript integration
-- [x] Biome for linting/formatting
-- [x] AudioModule for recording/playback
-- [x] StorageModule for data persistence
-- [x] Single HTML file output
-- [x] TranscriptionModule using Web Speech API
-- [x] LoggerModule for comprehensive logging
-- [x] FixedStorageModule preventing quota exceeded errors
-- [x] Plugin system for modular functionality
+## Phase 0: Core Recording with Full Multilingual Support (Planned)
+- [ ] Vue 3 with Composition API
+- [ ] Vite build system
+- [ ] TypeScript integration
+- [ ] Biome for linting/formatting
+- [ ] AudioModule for recording/playback
+- [ ] StorageModule for data persistence
+- [ ] Single HTML file output
+- [ ] Recording history with metadata
+- [ ] LoggerModule for comprehensive logging
+- [ ] FixedStorageModule preventing quota exceeded errors
+- [ ] Plugin system for modular functionality
+- [ ] Full multilingual support (English, Ukrainian, Russian) throughout the application
+- [ ] Interface language switching
+- [ ] Light/Dark theme toggle
 
-## Phase 1: Core Functionality (Completed)
-- [x] Basic audio recording function
-- [x] Playback of recordings in interface
-- [x] Adding metadata to recordings
+## Phase 1: Transcription with Multilingual Support (Planned)
+- [ ] Speech transcription (Russian, English, Ukrainian)
+- [ ] Real-time transcription capability
+- [ ] TranscriptionModule using Web Speech API
+- [ ] Language detection for transcription
+- [ ] Manual language selection for transcription
+- [ ] Continued support for English, Ukrainian, and Russian throughout the application
 
-## Phase 2: Processing Features (Completed)
-- [x] Speech transcription (Russian and English)
-- [x] Translation to different languages
-- [x] Voiceover of translated text
-- [x] Silence detection
+## Phase 2: Translation with Multilingual Support (Planned)
+- [ ] Translation of transcribed text to different languages
+- [ ] TranslationModule with API integration
+- [ ] Automatic translation of phrases/messages
+- [ ] Support for multiple target languages
+- [ ] Translation history and caching
+- [ ] Continued support for English, Ukrainian, and Russian throughout the application
 
-## Phase 3: Advanced Features (Completed)
-- [x] Automatic cleanup by settings
-- [x] Export logs
-- [x] PWA (Progressive Web App) support
-- [x] Modular architecture with plugins
+## Phase 3: Voiceover with Multilingual Support (Planned)
+- [ ] Text-to-speech functionality for translated text
+- [ ] VoiceoverModule with TTS engine
+- [ ] Voiceover in Russian and English
+- [ ] Adjustable voice parameters (speed, pitch)
+- [ ] Synchronized voiceover with text
+- [ ] Continued support for English, Ukrainian, and Russian throughout the application
 
-## Phase 4: Extended Capabilities (Planned)
+## Phase 4: Advanced Features with Multilingual Support (Planned)
+- [ ] PWA (Progressive Web App) support
+- [ ] Automatic cleanup by settings
+- [ ] Export logs functionality
+- [ ] Modular architecture with plugins
+- [ ] Continued support for English, Ukrainian, and Russian throughout the application
+
+## Phase 5: Extended Capabilities with Multilingual Support (Planned)
 - [ ] Advanced audio editing capabilities
 - [ ] Cloud storage integration (optional)
 - [ ] Multi-user support
 - [ ] Collaboration features
+- [ ] Continued support for English, Ukrainian, and Russian throughout the application
 
-## Phase 5: Audio Intelligence (Planned)
+## Phase 6: Audio Intelligence with Multilingual Support (Planned)
 - [ ] Audio classification module using TensorFlow.js
 - [ ] Voice activity detection using Picovoice Cobra
 - [ ] Audio fingerprinting for sound identification
 - [ ] Real-time sound recognition (voice, silence, birds, dogs, city noise, waterfall)
 - [ ] Noise suppression and audio quality improvements
 - [ ] Audio processing enhancements with Howler.js
+- [ ] Continued support for English, Ukrainian, and Russian throughout the application
