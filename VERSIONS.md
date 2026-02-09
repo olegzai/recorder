@@ -16,12 +16,13 @@
 - Interface language switching capability
 - Light/Dark theme toggle
 
-## v0.0.2 (Transcription Features with Multilingual Support) - Planned
+## v0.0.2 (Real-time Transcription Features with Multilingual Support) - Planned
 - Speech transcription (Russian, English, Ukrainian) using Web Speech API
-- Real-time transcription capability
+- Real-time transcription capability that starts automatically when recording begins
 - TranscriptionModule using Web Speech API
 - Language detection for transcription
 - Manual language selection for transcription
+- Instantaneous transcription during recording
 - Continued support for English, Ukrainian, and Russian throughout the application
 
 ## v0.1.0 (Translation Features with Multilingual Support) - Planned
@@ -81,12 +82,13 @@
 - [ ] Interface language switching
 - [ ] Light/Dark theme toggle
 
-## Phase 1: Transcription with Multilingual Support (Planned)
+## Phase 1: Real-time Transcription with Multilingual Support (Planned)
 - [ ] Speech transcription (Russian, English, Ukrainian)
-- [ ] Real-time transcription capability
+- [ ] Real-time transcription that starts automatically when recording begins
 - [ ] TranscriptionModule using Web Speech API
 - [ ] Language detection for transcription
 - [ ] Manual language selection for transcription
+- [ ] Instantaneous transcription during recording
 - [ ] Continued support for English, Ukrainian, and Russian throughout the application
 
 ## Phase 2: Translation with Multilingual Support (Planned)

@@ -91,10 +91,10 @@ Recorder is a lightweight, standalone sound recording solution that uses modern 
 - **Export Options**: Save recordings in multiple formats (WAV, MP3, OGG, WebM)
 - **Multilingual Support**: Full support for English, Ukrainian, and Russian languages throughout the application
 - **Transcription**: Ability to convert speech to text in Russian, English, and Ukrainian (fully implemented)
+- **Real-time Transcription**: Transcription starts automatically when recording begins, providing instant speech-to-text conversion (fully implemented)
 - **Translation**: Function to translate transcribed text into different languages (placeholder implementation)
 - **Comprehensive Logging**: All application processes are logged for diagnostics
 - **Typedoc Documentation**: API documentation generated with Typedoc
-- **Real-time Transcription**: Live speech-to-text conversion with support for multiple languages (fully implemented)
 - **Voiceover**: Ability to voice over translated text (placeholder implementation)
 - **Silence Detection**: Automatic silence detection during recording
 - **Automatic Cleanup**: Configure retention period for recordings and ability to fully clear
