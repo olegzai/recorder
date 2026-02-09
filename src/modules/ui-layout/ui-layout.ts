@@ -129,8 +129,8 @@ export class UILayoutModule {
           <div class="plugins-panel">
             <label><input type="checkbox" id="recorderEnabled" checked> Recording Module</label>
             <label><input type="checkbox" id="transcriptionEnabled" checked> Transcription Module</label>
-            <label><input type="checkbox" id="translationEnabled" checked> Translation Module</label>
-            <label><input type="checkbox" id="voiceoverEnabled" checked> Voiceover Module</label>
+            <label><input type="checkbox" id="translationEnabled"> Translation Module</label>
+            <label><input type="checkbox" id="voiceoverEnabled"> Voiceover Module</label>
             <label><input type="checkbox" id="historyEnabled" checked> History</label>
             <label><input type="checkbox" id="settingsEnabled" checked> Settings</label>
           </div>

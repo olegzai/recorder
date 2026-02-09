@@ -266,8 +266,8 @@ const settings = ref<Settings>({
 const plugins = ref<Plugins>({
   recorderEnabled: true,
   transcriptionEnabled: true,
-  translationEnabled: true,
-  voiceoverEnabled: true,
+  translationEnabled: false,
+  voiceoverEnabled: false,
   historyEnabled: true,
   settingsEnabled: true,
 });
