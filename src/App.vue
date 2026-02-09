@@ -8,9 +8,11 @@
                     id="recordBtn" 
                     @click="toggleRecording"
                     :class="{ 'recording-active': isRecording }"
+                    :style="{ backgroundColor: isRecording ? '#dc3545' : '#28a745' }"
                 >
                     {{ isRecording ? 'Stop Recording' : 'Start Recording' }}
                 </button>
+                <div id="recordingTimer" class="recording-timer">{{ recordingTimer }}</div>
                 <div id="recorderStatus">{{ status }}</div>
             </div>
         </details>
@@ -248,6 +250,8 @@ const transcription = ref('');
 const translation = ref('');
 const isTranscribing = ref(false);
 const transcriptionStatus = ref('Ready for transcription');
+const recordingStartTime = ref<number | null>(null);
+const recordingTimer = ref('00:00.000');
 
 // Список записей
 const recordings = ref<Recording[]>([]);
@@ -321,6 +325,36 @@ const log = (message: string, level: 'info' | 'warn' | 'error' = 'info') => {
   }
 };
 
+// Timer utility functions
+const formatTime = (milliseconds: number): string => {
+  const totalSeconds = milliseconds / 1000;
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = Math.floor(totalSeconds % 60);
+  const ms = Math.floor((milliseconds % 1000));
+  
+  return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${ms.toString().padStart(3, '0')}`;
+};
+
+const updateTimer = () => {
+  if (recordingStartTime.value !== null && isRecording.value) {
+    const elapsed = Date.now() - recordingStartTime.value;
+    recordingTimer.value = formatTime(elapsed);
+  }
+};
+
+const startTimer = () => {
+  recordingStartTime.value = Date.now();
+  recordingTimer.value = '00:00.000';
+  
+  // Update timer every 10ms for millisecond precision
+  const timerInterval = setInterval(() => {
+    if (!isRecording.value) {
+      clearInterval(timerInterval);
+    }
+    updateTimer();
+  }, 10);
+};
+
 const toggleRecording = async () => {
   if (isRecording.value) {
     await stopRecording();
@@ -355,6 +389,9 @@ const startRecording = async () => {
       await startRealTimeTranscription(stream);
     }
 
+    // Start the recording timer
+    startTimer();
+
     status.value = 'Recording... Press STOP to finish';
     isRecording.value = true;
     log('Recording started');
@@ -373,6 +410,10 @@ const stopRecording = async () => {
     if (isTranscribing.value) {
       stopTranscription();
     }
+
+    // Reset the recording timer
+    recordingStartTime.value = null;
+    recordingTimer.value = '00:00.000';
 
     // Останавливаем запись
     const audioBlob = await audioModule.stopRecording();
@@ -945,5 +986,14 @@ audio {
 
 #recordBtn.recording-active:hover {
     background-color: #c82333;
+}
+
+.recording-timer {
+    font-family: monospace;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #007bff;
+    margin: 10px 0;
+    text-align: center;
 }
 </style>
