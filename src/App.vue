@@ -381,6 +381,8 @@ const stopRecording = async () => {
       duration: 0, // В реальном приложении это будет точная длительность
       format: settings.value.audioFormat,
       language: settings.value.transcriptionLang,
+      transcription: transcription.value || '', // Сохраняем текущую транскрипцию
+      translation: translation.value || '', // Сохраняем текущий перевод
     };
 
     log(`Attempting to save recording with metadata: ${JSON.stringify(metadata)}`);
