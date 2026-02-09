@@ -4,9 +4,14 @@
 - Modern architecture with Vue 3, Vite, TypeScript
 - Core audio recording functionality
 - AudioModule for recording/playback
-- StorageModule for localStorage management
+- StorageModule for IndexedDB/localStorage management
+- TranscriptionModule using Web Speech API
+- LoggerModule for comprehensive application logging
 - Single HTML file output
 - Accordion interface as specified
+- Plugin system for modular functionality
+- Automatic cleanup by settings
+- Export logs functionality
 
 ## v1.0.0 (Initial Release) - Planned
 - Core functionality implemented
@@ -32,6 +37,14 @@
 - Multi-user support
 - Collaboration features
 
+## v1.4.0 (Audio Intelligence Features) - Planned
+- Audio classification module using TensorFlow.js
+- Voice activity detection using Picovoice Cobra
+- Audio fingerprinting for sound identification
+- Real-time sound recognition (voice, silence, birds, dogs, city noise, waterfall)
+- Audio processing enhancements with Howler.js
+- Noise suppression and audio quality improvements
+
 # Development Phases
 
 ## Phase 0: Modern Architecture (Completed)
@@ -42,26 +55,38 @@
 - [x] AudioModule for recording/playback
 - [x] StorageModule for data persistence
 - [x] Single HTML file output
+- [x] TranscriptionModule using Web Speech API
+- [x] LoggerModule for comprehensive logging
+- [x] FixedStorageModule preventing quota exceeded errors
+- [x] Plugin system for modular functionality
 
-## Phase 1: Core Functionality (Planned)
-- [ ] Basic audio recording function
-- [ ] Playback of recordings in interface
-- [ ] Adding metadata to recordings
+## Phase 1: Core Functionality (Completed)
+- [x] Basic audio recording function
+- [x] Playback of recordings in interface
+- [x] Adding metadata to recordings
 
-## Phase 2: Processing Features (Planned)
-- [ ] Speech transcription (Russian and English)
-- [ ] Translation to different languages
-- [ ] Voiceover of translated text
-- [ ] Silence detection
+## Phase 2: Processing Features (Completed)
+- [x] Speech transcription (Russian and English)
+- [x] Translation to different languages
+- [x] Voiceover of translated text
+- [x] Silence detection
 
-## Phase 3: Advanced Features (Planned)
-- [ ] Automatic cleanup by settings
-- [ ] Export logs
-- [ ] PWA (Progressive Web App) support
-- [ ] Modular architecture with plugins
+## Phase 3: Advanced Features (Completed)
+- [x] Automatic cleanup by settings
+- [x] Export logs
+- [x] PWA (Progressive Web App) support
+- [x] Modular architecture with plugins
 
 ## Phase 4: Extended Capabilities (Planned)
 - [ ] Advanced audio editing capabilities
 - [ ] Cloud storage integration (optional)
 - [ ] Multi-user support
 - [ ] Collaboration features
+
+## Phase 5: Audio Intelligence (Planned)
+- [ ] Audio classification module using TensorFlow.js
+- [ ] Voice activity detection using Picovoice Cobra
+- [ ] Audio fingerprinting for sound identification
+- [ ] Real-time sound recognition (voice, silence, birds, dogs, city noise, waterfall)
+- [ ] Noise suppression and audio quality improvements
+- [ ] Audio processing enhancements with Howler.js

@@ -37,6 +37,14 @@
 - Multi-user support
 - Collaboration features
 
+## v1.4.0 (Audio Intelligence Features) - Planned
+- Audio classification module using TensorFlow.js
+- Voice activity detection using Picovoice Cobra
+- Audio fingerprinting for sound identification
+- Real-time sound recognition (voice, silence, birds, dogs, city noise, waterfall)
+- Audio processing enhancements with Howler.js
+- Noise suppression and audio quality improvements
+
 # Development Phases
 
 ## Phase 0: Modern Architecture (Completed)
@@ -74,3 +82,11 @@
 - [ ] Cloud storage integration (optional)
 - [ ] Multi-user support
 - [ ] Collaboration features
+
+## Phase 5: Audio Intelligence (Planned)
+- [ ] Audio classification module using TensorFlow.js
+- [ ] Voice activity detection using Picovoice Cobra
+- [ ] Audio fingerprinting for sound identification
+- [ ] Real-time sound recognition (voice, silence, birds, dogs, city noise, waterfall)
+- [ ] Noise suppression and audio quality improvements
+- [ ] Audio processing enhancements with Howler.js
