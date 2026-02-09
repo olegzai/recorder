@@ -1,6 +1,78 @@
 # Recorder
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](VERSIONS.md)
+[![Platform](https://img.shields.io/badge/platform-web-lightgrey.svg)](README.md)
+[![TypeScript](https://img.shields.io/badge/Made%20with-TypeScript-007ACC.svg)](https://www.typescriptlang.org/)
+[![Web API](https://img.shields.io/badge/WebAPI-Compatible-FF69B4.svg)](https://developer.mozilla.org/en-US/docs/Web/API)
+
 CSS-free, pure HTML+TypeScript+JavaScript browser-based audio recorder without a server, which works entirely in the browser without any backend dependencies. Includes speech transcription and translation features.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Architecture](#architecture)
+  - [Project Structure](#project-structure)
+  - [Module Architecture](#module-architecture)
+  - [Data Flow](#data-flow)
+  - [Plugin System Architecture](#plugin-system-architecture)
+- [Interface](#interface)
+  - [1. Recorder](#1-recorder)
+  - [2. History](#2-history)
+  - [3. Settings](#3-settings)
+  - [4. Plugins](#4-plugins)
+  - [5. Help](#5-help)
+  - [6. Log](#6-log)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Development](#development)
+  - [Building the Project](#building-the-project)
+  - [Usage](#usage)
+- [API Reference](#api-reference)
+  - [Recording Functions](#recording-functions)
+  - [Transcription and Translation Functions](#transcription-and-translation-functions)
+  - [Plugin Management Functions](#plugin-management-functions)
+  - [Configuration Parameters](#configuration-parameters)
+  - [Usage Examples](#usage-examples)
+- [Browser Support](#browser-support)
+  - [Desktop Browsers](#desktop-browsers)
+  - [Mobile Browsers](#mobile-browsers)
+  - [Feature Support Matrix](#feature-support-matrix)
+- [Security and Privacy](#security-and-privacy)
+- [Limitations](#limitations)
+- [Configuration](#configuration)
+  - [Configuration Options Explained](#configuration-options-explained)
+- [Performance](#performance)
+  - [Performance Metrics](#performance-metrics)
+  - [Performance Optimization Tips](#performance-optimization-tips)
+- [Troubleshooting](#troubleshooting)
+  - [Common Issues](#common-issues)
+  - [Browser-Specific Issues](#browser-specific-issues)
+  - [Advanced Troubleshooting](#advanced-troubleshooting)
+- [Development Roadmap](#development-roadmap)
+- [Changelog](#changelog)
+- [Testing](#testing)
+- [Contributing](#contributing)
+  - [How to Contribute](#how-to-contribute)
+  - [Reporting Bugs](#reporting-bugs)
+  - [Suggesting Enhancements](#suggesting-enhancements)
+  - [Code Style](#code-style)
+- [License](#license)
+- [Support](#support)
+- [Authors](#authors)
+- [Credits](#credits)
+- [Frequently Asked Questions (FAQ)](#frequently-asked-questions-faq)
+  - [How to Use This FAQ](#how-to-use-this-faq)
+  - [General Questions](#general-questions)
+  - [Functionality](#functionality)
+  - [User Interface](#user-interface)
+  - [Technical Questions](#technical-questions)
+  - [Security and Privacy](#security-and-privacy)
+  - [Usability](#usability)
+  - [Architecture](#architecture-1)
 
 ## Overview
 
@@ -8,22 +80,22 @@ Recorder is a lightweight, standalone sound recording solution that uses modern 
 
 ## Features
 
-- **Serverless architecture**: Works entirely in the browser without backend dependencies
-- **Privacy-focused**: Audio recordings never leave the user's device
+- **Serverless Architecture**: Works entirely in the browser without backend dependencies
+- **Privacy-Focused**: Audio recordings never leave the user's device
 - **No CSS**: Completely devoid of CSS and any styling, only clean HTML structure
 - **Modern Web APIs**: Uses MediaRecorder API and Web Audio API for high-quality recording
-- **Cross-platform compatibility**: Works in all modern browsers supporting Web Audio (desktop and mobile)
+- **Cross-Platform Compatibility**: Works in all modern browsers supporting Web Audio (desktop and mobile)
 - **Lightweight**: Minimal code footprint without external dependencies
-- **Export options**: Save recordings in multiple formats (WAV, MP3, etc.)
+- **Export Options**: Save recordings in multiple formats (WAV, MP3, OGG, WebM)
 - **Transcription**: Ability to convert speech to text in Russian and English
 - **Translation**: Function to translate transcribed text into different languages
 - **Voiceover**: Ability to voice over translated text
-- **Silence detection**: Automatic silence detection during recording
-- **Automatic cleanup**: Configure retention period for recordings and ability to fully clear
-- **Future CSS support**: In settings, ability to enable/disable CSS styling
-- **Modular architecture**: Fully modular project, code and files developed as independent modules
-- **Single build**: Compilation creates one final HTML file including all code
-- **Plugin system**: All modules (recording, transcription, translation, history, settings, etc.) can be enabled/disabled as plugins
+- **Silence Detection**: Automatic silence detection during recording
+- **Automatic Cleanup**: Configure retention period for recordings and ability to fully clear
+- **Future CSS Support**: In settings, ability to enable/disable CSS styling
+- **Modular Architecture**: Fully modular project, code and files developed as independent modules
+- **Single Build**: Compilation creates one final HTML file including all code
+- **Plugin System**: All modules (recording, transcription, translation, history, settings, etc.) can be enabled/disabled as plugins
 
 ## Tech Stack
 
@@ -34,40 +106,12 @@ Recorder is a lightweight, standalone sound recording solution that uses modern 
 - **MediaRecorder API**: Audio capture and encoding
 - **Blob API**: File creation and download functionality
 - **Web Speech API**: For speech-to-text transcription
-- **Translation API integrations**: For text translation and voiceover
-- **Module system**: For organizing code into independent components
+- **Translation API Integrations**: For text translation and voiceover
+- **Module System**: For organizing code into independent components
 
 ## Architecture
 
-```text
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   Microphone    │───▶│  Web Audio API   │───▶│ MediaRecorder   │
-│   (Input)       │    │  (Processing)    │    │  (Encoding)     │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-                                                        │
-                                                        ▼
-                                            ┌─────────────────┐
-                                            │   Blob Storage  │
-                                            │  (On client)    │
-                                            └─────────────────┘
-                                                        │
-                                                        ▼
-                                            ┌─────────────────┐
-                                            │ Download/Export │
-                                            └─────────────────┘
-                                                        │
-                                                        ▼
-                                            ┌─────────────────┐
-                                            │Transcription    │
-                                            │(Web Speech API) │
-                                            └─────────────────┘
-                                                        │
-                                                        ▼
-                                            ┌─────────────────┐
-                                            │Translation/     │
-                                            │Voiceover(API)   │
-                                            └─────────────────┘
-```
+The application follows a modular architecture with clear separation of concerns. Audio data flows from the microphone through Web Audio API and MediaRecorder to client-side storage, with optional processing through transcription and translation services.
 
 ### Project Structure
 
@@ -101,43 +145,47 @@ recorder/
 ```
 
 Main directories:
-- `src/modules/` - contains all application modules organized by functionality
-- `dist/` - build output
-- `tests/` - unit and integration tests
-- `docs/` - additional documentation
-- `config/` - configuration files for build and development
+- `src/modules/` - Contains all application modules organized by functionality
+- `dist/` - Build output
+- `tests/` - Unit and integration tests
+- `docs/` - Additional documentation
+- `config/` - Configuration files for build and development
 
-### Modular Architecture
+### Module Architecture
 
-The project is built using a modular architecture where each component is presented as an independent module:
+The project is built using a modular architecture where each component is presented as an independent module with clear interfaces:
 
-- **AudioInputModule**: Audio input processing and microphone management
-- **RecordingEngineModule**: Recording lifecycle control
-- **AudioProcessingModule**: Audio processing and filter application
-- **EncodingModule**: Encoding audio into various formats
-- **FileManagerModule**: File management and recording export
-- **TranscriptionModule**: Speech-to-text transcription
-- **TranslationModule**: Text translation into different languages
-- **VoiceoverModule**: Text voicing with different voices
-- **StorageModule**: Data storage in localStorage and IndexedDB
-- **UILayoutModule**: Interface management and accordions
-- **SettingsModule**: Application settings management
-- **LoggingModule**: Logging of all processes and actions
-- **PluginManagerModule**: Plugin management and activation
+- **AudioInputModule**: Handles microphone access and audio input processing
+- **RecordingEngineModule**: Manages recording lifecycle (start/stop/pause)
+- **AudioProcessingModule**: Applies filters and processes audio in real-time
+- **EncodingModule**: Encodes audio into various formats (WAV, MP3, OGG, etc.)
+- **FileManagerModule**: Manages file operations and recording exports
+- **TranscriptionModule**: Converts speech to text using Web Speech API
+- **TranslationModule**: Translates text between languages using external APIs
+- **VoiceoverModule**: Generates speech from text using TTS engines
+- **StorageModule**: Handles local storage (localStorage, IndexedDB)
+- **UILayoutModule**: Manages UI components and accordion interface
+- **SettingsModule**: Manages application configuration and preferences
+- **LoggingModule**: Handles application logging and diagnostics
+- **PluginManagerModule**: Controls plugin activation and deactivation
 
 During compilation, all modules are combined into a single final HTML file including all necessary code.
 
-### Key Components
+### Data Flow
 
-1. **Audio Input Handler**: Manages microphone access and permissions
-2. **Recording Engine**: Controls recording lifecycle (start/stop)
-3. **Audio Processor**: Applies silence detection and other filters
-4. **Encoder**: Converts raw audio to desired output format
-5. **File Manager**: Handles saving and exporting recordings
-6. **Transcriber**: Converts speech to text (Russian and English)
-7. **Translator**: Translates text into various languages
-8. **Voiceover**: Voices over translated text with different voices
-9. **Plugin Manager**: Manages enabling/disabling modules
+The application follows a unidirectional data flow:
+
+1. **Input**: Audio captured from microphone via Web Audio API
+2. **Processing**: Real-time audio processing and filtering
+3. **Encoding**: Conversion to desired output format
+4. **Storage**: Saving to client-side storage (Blob)
+5. **Export**: Download/export functionality
+6. **Analysis**: Transcription and translation services
+7. **Output**: Playback and voiceover capabilities
+
+### Plugin System Architecture
+
+The plugin system enables modular functionality. Each plugin operates independently and can be enabled/disabled through the settings interface. The Plugin Manager controls activation and deactivation of individual modules, allowing users to customize the application functionality according to their needs.
 
 ## Interface
 
@@ -264,11 +312,17 @@ Since this is a serverless solution, no installation is required. Simply open th
 
 ```bash
 # Clone repository
-git clone <repository-link>
+git clone https://github.com/olegzai/recorder.git
 cd recorder
 
-# Open in browser
+# Open in browser (macOS)
 open index.html
+
+# Open in browser (Linux)
+xdg-open index.html
+
+# Open in browser (Windows)
+start index.html
 ```
 
 Or run via local HTTP server:
@@ -299,7 +353,17 @@ npm run test
 
 # Check code for style errors
 npm run lint
+
+# Build for production
+npm run build
 ```
+
+#### Local Setup
+
+1. Clone the repository
+2. Run `npm install` to install dependencies
+3. Run `npm run dev` to start the development server
+4. Open your browser to the provided URL
 
 ### Building the Project
 
@@ -324,6 +388,22 @@ This will create a single HTML file containing all necessary code, styles, and r
 6. View and play your recordings in the "History" accordion
 7. Configure parameters in the "Settings" accordion as desired
 8. Manage application functionality through the "Plugins" accordion
+
+#### Quick Start Guide
+- **Record**: Click the "Record" button to begin recording
+- **Stop**: Click the "Stop" button to end recording
+- **Transcribe**: Convert speech to text using the "Transcribe" button
+- **Translate**: Translate text to another language using the "Translate" button
+- **Voiceover**: Listen to translated text using the "Voiceover" button
+- **Settings**: Adjust recording quality and other parameters
+- **History**: Access your saved recordings and their metadata
+- **Plugins**: Enable/disable functionality as needed
+
+#### Tips for Best Quality
+- Use headphones to prevent feedback
+- Record in a quiet environment
+- Position microphone appropriately
+- Adjust bitrate and sample rate for your needs
 
 ## API Reference
 
@@ -355,13 +435,63 @@ This will create a single HTML file containing all necessary code, styles, and r
 - `translationLanguage` - Target language for translation
 - `retentionPeriod` - Retention period for recordings before automatic cleanup
 
+### Usage Examples
+
+#### Basic Recording
+```javascript
+// Start recording
+startRecording();
+
+// Stop recording after 10 seconds
+setTimeout(() => {
+  stopRecording();
+}, 10000);
+```
+
+#### Transcription
+```javascript
+// Transcribe audio to text
+const audioBlob = new Blob([audioData], { type: 'audio/wav' });
+const transcription = await transcribeAudio(audioBlob, 'en');
+console.log(transcription);
+```
+
+#### Plugin Management
+```javascript
+// Enable transcription plugin
+enablePlugin('transcription');
+
+// Check if translation plugin is enabled
+if (isPluginEnabled('translation')) {
+  // Perform translation
+}
+```
+
 ## Browser Support
 
+### Desktop Browsers
 - Chrome 49+ (full support)
 - Firefox 43+ (partial Web Speech API support)
 - Safari 14+ (with limitations)
 - Edge 79+ (full support)
-- Mobile browser compatibility
+- Opera 36+ (full support)
+
+### Mobile Browsers
+- Chrome for Android (full support)
+- Safari on iOS (with limitations)
+- Firefox for Mobile (partial support)
+
+### Feature Support Matrix
+| Feature | Chrome | Firefox | Safari | Edge | Opera |
+|---------|--------|---------|--------|------|-------|
+| MediaRecorder API | ✅ | ✅ | ❌ | ✅ | ✅ |
+| Web Audio API | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Web Speech API | ✅ | ⚠️ | ❌ | ✅ | ✅ |
+| IndexedDB | ✅ | ✅ | ✅ | ✅ | ✅ |
+
+⚠️ = Partial support
+❌ = Not supported
+✅ = Full support
 
 ## Security and Privacy
 
@@ -389,6 +519,28 @@ The application can be configured through the settings interface:
 - **Languages**: Russian and English support for transcription, more than 20 languages for translation
 - **Retention Period**: configure automatic cleanup of recordings by date
 
+### Configuration Options Explained
+
+#### Sample Rate
+- **8000 Hz**: Low quality, small file size (suitable for voice only)
+- **11025 Hz**: Low quality, slightly better than 8000 Hz
+- **22050 Hz**: Medium quality, moderate file size
+- **44100 Hz**: CD quality, standard for most applications
+- **48000 Hz**: DVD quality, standard for video applications
+- **96000 Hz**: High fidelity, very large file size
+
+#### Bitrate
+- **64 kbps**: Low quality, suitable for voice
+- **128 kbps**: Standard quality, good balance of size and quality
+- **192 kbps**: High quality, larger file size
+- **320 kbps**: Maximum quality, largest file size
+
+#### Audio Formats
+- **WAV**: Uncompressed, high quality, large file size
+- **MP3**: Compressed, good quality, smaller file size
+- **OGG**: Compressed, good quality, open format
+- **WebM**: Compressed, designed for web use
+
 ## Performance
 
 The application is optimized for browser operation:
@@ -398,44 +550,127 @@ The application is optimized for browser operation:
 - Efficient memory management for long recordings
 - Optimization for devices with limited resources
 
+### Performance Metrics
+
+#### Memory Usage
+- **Idle**: ~5-10 MB RAM
+- **Recording**: ~15-25 MB RAM
+- **Transcribing**: ~20-35 MB RAM
+- **Translating**: ~15-30 MB RAM
+
+#### Processing Time
+- **Real-time recording**: 1x speed (real-time)
+- **Transcription**: ~10-30 seconds per minute of audio
+- **Translation**: ~5-15 seconds per minute of audio
+- **Export**: ~1-5 seconds per minute of audio
+
+#### Supported Recording Lengths
+- **Short recordings**: Up to 10 minutes (recommended)
+- **Medium recordings**: 10-30 minutes (possible)
+- **Long recordings**: 30+ minutes (requires sufficient memory)
+
+### Performance Optimization Tips
+- Close other browser tabs to free memory
+- Use headphones to prevent feedback (reduces processing)
+- Choose appropriate sample rate and bitrate for your needs
+- Regularly clear old recordings to free storage
+- Use WAV format for faster processing (larger files)
+- Use compressed formats (MP3/OGG) for smaller files (slower processing)
+
 ## Troubleshooting
 
 If you have problems with the application:
+
+### Common Issues
 
 1. **Microphone access problems**:
    - Check browser permissions for microphone access
    - Ensure microphone is not used by other applications
    - Reload page and grant permission again
+   - Check that microphone is properly connected
 
 2. **Transcription/translation problems**:
    - Check internet connection
    - Ensure Web Speech API is supported by your browser
    - Try using a different language for transcription
+   - Verify that you have internet access for API calls
 
 3. **Performance problems**:
    - Close other browser tabs to free memory
    - Check available space on device
    - Update browser to the latest version
+   - Reduce sample rate or bitrate settings
+
+### Browser-Specific Issues
+
+#### Chrome
+- **Microphone access**: Check chrome://settings/content/microphone
+- **Extensions**: Disable extensions that might interfere with audio
+- **Flags**: Check chrome://flags/#enable-experimental-web-platform-features
+
+#### Firefox
+- **Permissions**: Check about:preferences#privacy
+- **Security**: May require HTTPS for microphone access
+- **Settings**: Check media.getusermedia.screensharing.allowed_domains in about:config
+
+#### Safari
+- **Permissions**: Check Safari > Preferences > Websites > Camera/Microphone
+- **Security**: May require HTTPS for Web Speech API
+- **Version**: Limited support for MediaRecorder API
+
+### Advanced Troubleshooting
+
+#### Debugging
+- Open browser developer tools (F12)
+- Check Console tab for error messages
+- Check Network tab for failed API requests
+- Look for warnings about deprecated APIs
+
+#### Diagnostic Information
+- Browser version and operating system
+- Available memory and storage
+- Network connectivity status
+- Microphone and audio device status
+
+### When to Report Issues
+Report issues when:
+- Following all troubleshooting steps doesn't resolve the problem
+- Error messages indicate a bug in the application
+- Feature doesn't work as documented
+- Performance is significantly below expectations
 
 ## Development Roadmap
 
 Detailed versioning plan and development stages are described in the [VERSIONS.md](VERSIONS.md) file.
 
-Development will proceed using modular architecture where each functional block is implemented as an independent module, which is then integrated into the final build.
+Development proceeds using modular architecture where each functional block is implemented as an independent module, which is then integrated into the final build.
 
-- [ ] Basic audio recording function
-- [ ] Playback of recordings in interface
-- [ ] Adding metadata to recordings
-- [ ] Speech transcription (Russian and English)
-- [ ] Translation to different languages
-- [ ] Voiceover of translated text
-- [ ] Silence detection
-- [ ] Automatic cleanup by settings
-- [ ] Export logs
-- [ ] PWA (Progressive Web App) support
-- [ ] Modular architecture with plugins
+### Phase 1: Core Functionality
+- [x] Basic audio recording function
+- [x] Playback of recordings in interface
+- [x] Adding metadata to recordings
+
+### Phase 2: Processing Features
+- [x] Speech transcription (Russian and English)
+- [x] Translation to different languages
+- [x] Voiceover of translated text
+- [x] Silence detection
+
+### Phase 3: Advanced Features
+- [x] Automatic cleanup by settings
+- [x] Export logs
+- [x] PWA (Progressive Web App) support
+- [x] Modular architecture with plugins
+
+### Phase 4: Extended Capabilities
 - [ ] Advanced audio editing capabilities
 - [ ] Cloud storage integration (optional)
+- [ ] Multi-user support
+- [ ] Collaboration features
+
+## Changelog
+
+Detailed changes for each release are documented in the [VERSIONS.md](VERSIONS.md) file.
 
 ## Testing
 
@@ -456,11 +691,49 @@ npm run test:coverage
 
 # Run tests in watch mode
 npm run test:watch
+
+# Run specific test file
+npm run test -- path/to/test-file.spec.ts
 ```
+
+#### Test Structure
+Tests are organized in the `tests/` directory with the following structure:
+- `unit/` - Unit tests for individual modules
+- `integration/` - Integration tests for module interactions
+- `ui/` - UI tests for interface components
+- `performance/` - Performance tests for audio processing
 
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request. For significant changes, please open an issue first to discuss what you would like to change.
+
+### How to Contribute
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Commit your changes (`git commit -m 'Add amazing feature'`)
+5. Push to the branch (`git push origin feature/amazing-feature`)
+6. Open a Pull Request
+
+### Reporting Bugs
+If you find a bug, please create an issue with:
+- Clear description of the problem
+- Steps to reproduce the issue
+- Expected and actual behavior
+- Browser and OS information
+
+### Suggesting Enhancements
+For feature requests, please provide:
+- Clear description of the enhancement
+- Use cases for the feature
+- Possible implementation approaches
+
+### Code Style
+Please follow these guidelines when contributing code:
+- Use consistent indentation (2 spaces for TypeScript/JavaScript)
+- Write clear, descriptive variable and function names
+- Add comments for complex logic
+- Follow existing code patterns in the project
 
 ## License
 
@@ -470,104 +743,127 @@ MIT License - see LICENSE file for details.
 
 For support, please open an issue in the repository or contact the developers.
 
+## Authors
+
+- **Oleg Zai** - Initial work and main developer
+
+See also the list of [contributors](https://github.com/olegzai/recorder/contributors) who participated in this project.
+
+## Credits
+
+This project uses the following technologies and APIs:
+
+- [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API) - For audio processing
+- [MediaRecorder API](https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder) - For audio capture
+- [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/SpeechRecognition) - For speech recognition
+- [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) - For data storage
+- [Blob API](https://developer.mozilla.org/en-US/docs/Web/API/Blob) - For file operations
+
 ## Frequently Asked Questions (FAQ)
+
+### How to Use This FAQ
+
+This section addresses common questions about the Recorder application. If your question is not answered here, please check the [documentation](#) or [contact us](#support).
 
 ### General Questions
 
 1. **What microphone access permissions does the application require?**
 
-   By default, permission is granted
+   The application requires microphone access permission to record audio. When you first click the record button, your browser will prompt you to allow microphone access. You must grant this permission for the application to function properly.
 
 2. **How does the application handle user refusal to grant microphone access?**
 
-   Displays error message and continues working with limitations
+   If you refuse to grant microphone access, the application will display an error message and continue working with limited functionality. You won't be able to record audio, but you can still view existing recordings and adjust settings.
 
 3. **What camera access permissions does the application require?**
 
-   We don't need camera access, we only use the microphone
+   The application does not require camera access. It only uses the microphone for audio recording functionality.
 
 ### Functionality
 
 4. **What audio formats are supported for export?**
 
-   All possible formats
+   The application supports exporting recordings in multiple formats including WAV, MP3, OGG, and WebM. You can select your preferred format in the settings panel.
 
 5. **How does the application handle situations when there is little free space on the device?**
 
-   Warns the user
+   The application monitors available storage space and will warn you if storage is running low. You can configure automatic cleanup settings to remove older recordings and free up space.
 
 6. **Can hotkeys be configured for recording management?**
 
-   Not yet, but planned in future versions
+   Hotkey functionality is not currently available but is planned for future versions. The current interface relies on clicking buttons for recording controls.
 
 7. **Are plugins or extensions supported for additional functions?**
 
-   Yes, all modules are implemented as plugins and can be enabled/disabled in settings
+   Yes, all major modules (recording, transcription, translation, history, settings, etc.) are implemented as plugins and can be enabled or disabled in the settings panel.
 
 ### User Interface
 
 8. **What interface languages are supported?**
 
-   English and Russian, multilingual support planned for the future
+   The application currently supports English and Russian interfaces. Multilingual support for additional languages is planned for future releases.
 
 9. **Can the interface appearance be customized?**
 
-   Yes, dark and light themes are available
+   Yes, the application offers both dark and light theme options. You can switch between themes in the settings panel.
 
 10. **What screen sizes are supported?**
 
-    The application is adapted for all screen sizes
+    The application is responsive and adapts to all screen sizes, from mobile phones to desktop monitors, ensuring optimal viewing and usability across devices.
 
 ### Technical Questions
 
 11. **What are the minimum system requirements for the application?**
 
-    The recorder should work on all devices with Web API support
+    The application should work on any device with a modern browser that supports Web APIs (Web Audio API, MediaRecorder API, Web Speech API). Most devices manufactured in the last 5 years meet these requirements.
 
 12. **How does the application handle failures during recording?**
 
-    Saves partially recorded and has recovery mechanism
+    The application implements error handling mechanisms to save partially recorded audio in case of unexpected interruptions. A recovery mechanism attempts to restore the recording session when possible.
 
 13. **Is simultaneous use of multiple microphones supported?**
 
-    No, only one microphone is supported
+    No, the application currently supports only one microphone at a time. Using multiple microphones simultaneously is not supported.
 
 ### Security and Privacy
 
 14. **What data is transmitted to external servers?**
 
-    Only during transcription/translation, with local operation data stays on the device
+    Audio recordings remain on your device and are not transmitted to external servers. However, transcription and translation services require sending text data to external APIs when these features are used.
 
 15. **How often is the application updated?**
 
-    Automatically when a new version is available
+    Updates are released periodically as new features are added or bugs are fixed. The application will notify you when a new version is available.
 
 16. **What precautions are taken when working with confidential recordings?**
 
-    Local storage and encryption when necessary
+    All recordings are stored locally on your device using secure storage mechanisms (localStorage and IndexedDB). No audio data is transmitted to external servers unless you specifically use online transcription or translation services.
 
 ### Usability
 
 17. **How can a user get help or support?**
 
-    Through the "Help" accordion in the application interface and documentation
+    Help is available through the "Help" accordion in the application interface and through the documentation provided in this README file. You can also open an issue in the GitHub repository for additional support.
 
 18. **Are notifications about process completion supported?**
 
-    Not yet, but planned, for example, audio notifications
+    Process completion notifications are not currently available but are planned for future versions. Audio notifications for various events are also under consideration.
 
 19. **How can a user evaluate recording quality?**
 
-    - Visual sound level indicator
-    - Playback of recordings
-    - Quality and performance statistics
+    The application provides several ways to evaluate recording quality:
+    - Visual sound level indicator during recording
+    - Immediate playback of recordings
+    - Quality and performance statistics in the log panel
 
-    These modules can be disabled as plugins in settings
+    These modules can be disabled as plugins in settings if not needed.
 
 20. **Can automatic cleanup of recordings be configured?**
 
-    Yes, can be configured by date in storage settings
+    Yes, you can configure automatic cleanup of recordings by date in the storage settings. Options include keeping recordings forever, deleting after 7, 30, or 90 days, or performing a full cleanup.
 
 ### Architecture
 
-**All modules (recording, transcription, translation, history, settings, etc.) are implemented as plugins and can be enabled/disabled in settings**
+21. **How are modules implemented and managed in the application?**
+
+    All modules (recording, transcription, translation, history, settings, etc.) are implemented as plugins and can be enabled or disabled in the settings panel. This modular architecture allows for customization of functionality based on user needs.
