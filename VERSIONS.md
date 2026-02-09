@@ -16,7 +16,7 @@
 - Interface language switching capability
 - Light/Dark theme toggle
 
-## v0.0.2 (Black and White Terminal Interface with Real-time Transcription) - Planned
+## v0.0.2 (Ukraine Yellow/Blue Terminal Interface with Real-time Transcription) - Planned
 - Speech transcription (Russian, English, Ukrainian) using Web Speech API
 - Real-time transcription capability that starts automatically when recording begins
 - TranscriptionModule using Web Speech API
@@ -24,8 +24,9 @@
 - Auto-detection option for transcription language with improved Russian detection
 - Manual language selection for transcription
 - Instantaneous transcription during recording
-- Black and white terminal-style interface with Swiss grid design principles
-- Green/red accent colors for actions and status indicators
+- Ukraine yellow/blue terminal-style interface with table grid design principles
+- Table grid structure with accordions (details/summary) implementation
+- Yellow/blue accent colors for actions and status indicators (Ukraine national colors)
 - Japanese minimalism design philosophy implementation
 - Fully responsive and adaptive layout for all screen sizes
 - Optimized space utilization with clean visual hierarchy
@@ -89,7 +90,7 @@
 - [ ] Interface language switching
 - [ ] Light/Dark theme toggle
 
-## Phase 1: Black and White Terminal Interface with Real-time Transcription (Planned)
+## Phase 1: Ukraine Yellow/Blue Terminal Interface with Real-time Transcription (Planned)
 - [ ] Speech transcription (Russian, English, Ukrainian)
 - [ ] Real-time transcription that starts automatically when recording begins
 - [ ] TranscriptionModule using Web Speech API
@@ -97,8 +98,9 @@
 - [ ] Auto-detection option for transcription language with improved Russian detection
 - [ ] Manual language selection for transcription
 - [ ] Instantaneous transcription during recording
-- [ ] Black and white terminal-style interface with Swiss grid design principles
-- [ ] Green/red accent colors for actions and status indicators
+- [ ] Ukraine yellow/blue terminal-style interface with table grid design principles
+- [ ] Table grid structure with accordions (details/summary) implementation
+- [ ] Yellow/blue accent colors for actions and status indicators (Ukraine national colors)
 - [ ] Japanese minimalism design philosophy implementation
 - [ ] Fully responsive and adaptive layout for all screen sizes
 - [ ] Optimized space utilization with clean visual hierarchy

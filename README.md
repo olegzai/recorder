@@ -12,8 +12,9 @@ Cyberpunk terminal-style audio recorder with Swiss grid design principles and Ja
 
 ## Design Philosophy
 
-- **Black and White Terminal Aesthetic**: High-contrast monochromatic interface with terminal-style design
-- **Green/Red Accent Colors**: Strategic use of green for success/positive actions and red for warnings/errors
+- **Ukraine Yellow/Blue Terminal Aesthetic**: Distinctive interface featuring Ukraine's national colors with terminal-style design
+- **Table Grid Structure**: Interface built using table-based grid layouts with accordions (details/summary)
+- **Yellow/Blue Accent Colors**: Strategic use of Ukraine's national colors (yellow: #ffd700, blue: #0057b7)
 - **Swiss Grid Principles**: Precise grid layout with consistent spacing and alignment
 - **Japanese Minimalism**: Absolute minimalism with essential elements only
 - **Responsive Design**: Fully adaptive interface that works on all screen sizes

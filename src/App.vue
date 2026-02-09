@@ -892,7 +892,7 @@ onUnmounted(async () => {
 </script>
 
 <style>
-/* Black and White Terminal Styles with Green/Red Accents */
+/* Ukraine Yellow/Blue Terminal Styles with Table Grids */
 
 /* Base application styling */
 #app {
@@ -900,38 +900,42 @@ onUnmounted(async () => {
     max-width: 100%;
     margin: 0 auto;
     padding: 20px;
-    color: #ffffff; /* White text */
-    background-color: #000000; /* Black background */
+    color: #0057b7; /* Blue text */
+    background-color: #ffd700; /* Yellow background */
     line-height: 1.6;
     box-sizing: border-box;
 }
 
-/* Swiss grid-inspired layout */
+/* Table grid layout for accordions */
 details {
-    border: 1px solid #ffffff;
-    border-radius: 0; /* Sharp edges for terminal feel */
+    border: 1px solid #0057b7;
+    border-radius: 0;
     margin-bottom: 15px;
     padding: 5px;
-    background-color: #000000;
+    background-color: #ffffff;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
 }
 
 summary {
     padding: 12px;
     cursor: pointer;
     font-weight: bold;
-    background-color: #000000;
-    color: #ffffff;
-    border-left: 3px solid #ffffff;
+    background-color: #0057b7;
+    color: #ffd700;
+    border-left: 3px solid #ffd700;
     font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
     letter-spacing: 1px;
     text-transform: uppercase;
+    display: table-header-group;
 }
 
 summary::marker {
-    color: #ffffff;
+    color: #ffd700;
 }
 
-/* Panel containers with Swiss grid principles */
+/* Panel containers with table grid principles */
 .recorder-controls,
 .history-panel,
 .settings-panel,
@@ -941,14 +945,15 @@ summary::marker {
 .transcription-panel {
     padding: 15px;
     font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
+    display: table-row;
 }
 
-/* Swiss grid-inspired recorder controls layout */
+/* Table grid-inspired recorder controls layout */
 .recorder-controls {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: 15px;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    text-align: center;
 }
 
 /* Japanese minimalism - only essential elements */
@@ -961,6 +966,9 @@ summary::marker {
     padding: 12px 24px;
     border: 1px solid;
     border-radius: 0;
+    background-color: #0057b7; /* Blue */
+    color: #ffd700; /* Yellow */
+    border-color: #ffd700; /* Yellow border */
 }
 
 #recordingTimer {
@@ -968,23 +976,23 @@ summary::marker {
     font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
     font-weight: bold;
     font-size: 1.4em;
-    color: #00ff00; /* Green for timer */
+    color: #0057b7; /* Blue for timer */
     text-align: center;
 }
 
 #recorderStatus {
     justify-self: center;
     font-style: italic;
-    color: #00ff00; /* Green for status */
+    color: #0057b7; /* Blue for status */
 }
 
-/* Terminal-style button styling with green/red accents */
+/* Terminal-style button styling with Ukraine colors */
 button {
     padding: 8px 16px;
     margin: 5px;
-    background-color: #000000;
-    color: #00ff00; /* Green text */
-    border: 1px solid #00ff00; /* Green border */
+    background-color: #0057b7; /* Blue */
+    color: #ffd700; /* Yellow */
+    border: 1px solid #ffd700; /* Yellow border */
     border-radius: 0;
     cursor: pointer;
     font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
@@ -994,31 +1002,35 @@ button {
 }
 
 button:hover {
-    background-color: rgba(0, 255, 0, 0.1);
+    background-color: #ffd700; /* Yellow on hover */
+    color: #0057b7; /* Blue text on hover */
 }
 
 button:disabled {
-    color: #888888;
-    border-color: #888888;
+    background-color: #cccccc;
+    color: #666666;
+    border-color: #999999;
     cursor: not-allowed;
 }
 
-/* Specific button colors - Green for start, Red for stop */
+/* Specific button colors - Blue/Yellow for start, Yellow/Blue for stop */
 #recordBtn:not(.recording-active) {
-    color: #00ff00; /* Green for start */
-    border-color: #00ff00;
+    background-color: #0057b7; /* Blue for start */
+    color: #ffd700; /* Yellow text */
+    border-color: #ffd700; /* Yellow border */
 }
 
 #recordBtn.recording-active {
-    color: #ff0000; /* Red for stop */
-    border-color: #ff0000;
+    background-color: #ffd700; /* Yellow for stop */
+    color: #0057b7; /* Blue text */
+    border-color: #0057b7; /* Blue border */
     animation: pulse 1s infinite;
 }
 
 @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+    0% { box-shadow: 0 0 0 0 rgba(0, 87, 183, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(0, 87, 183, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 87, 183, 0); }
 }
 
 input,
@@ -1026,9 +1038,9 @@ select,
 textarea {
     padding: 8px;
     margin: 5px;
-    background-color: #000000;
-    color: #ffffff;
-    border: 1px solid #ffffff;
+    background-color: #ffffff;
+    color: #0057b7;
+    border: 1px solid #0057b7;
     border-radius: 0;
     font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
 }
@@ -1037,59 +1049,63 @@ input:focus,
 select:focus,
 textarea:focus {
     outline: none;
-    box-shadow: 0 0 8px rgba(0, 255, 0, 0.4); /* Green glow when focused */
+    box-shadow: 0 0 8px rgba(0, 87, 183, 0.4); /* Blue glow when focused */
 }
 
 .recording-item {
-    border-bottom: 1px solid #ffffff;
+    border-bottom: 1px solid #0057b7;
     padding: 15px 0;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 10px;
-    align-items: center;
+    display: table-row;
 }
 
 .recording-info {
-    grid-column: 1 / -1;
+    display: table-cell;
+    vertical-align: top;
+    width: 70%;
 }
 
 .recording-content {
-    grid-column: 1 / -1;
-    margin-top: 10px;
+    display: table-cell;
+    vertical-align: top;
+    width: 30%;
 }
 
 .recording-actions {
-    grid-column: 1 / -1;
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 10px;
+    display: table-cell;
+    vertical-align: top;
+    text-align: right;
 }
 
 .recording-meta {
     font-size: 0.85em;
-    color: #00ff00; /* Green for metadata */
+    color: #ffd700; /* Yellow for metadata */
+    background-color: #0057b7; /* Blue background */
+    padding: 2px 5px;
+    border-radius: 3px;
 }
 
 audio {
     width: 100%;
     max-width: 300px;
-    background-color: #000000;
-    border: 1px solid #ffffff;
+    background-color: #ffffff;
+    border: 1px solid #0057b7;
 }
 
 .transcription-preview, .translation-preview {
     margin-top: 10px;
     padding: 10px;
-    border-left: 2px solid #00ff00; /* Green accent */
-    background-color: #000000;
-    color: #ffffff;
+    border-left: 2px solid #ffd700; /* Yellow accent */
+    background-color: #f0f8ff; /* Light blue background */
+    color: #0057b7;
 }
 
 .transcription-preview h4, .translation-preview h4 {
     margin: 0 0 5px 0;
     font-size: 0.9em;
-    color: #00ff00; /* Green for headers */
+    color: #ffd700; /* Yellow for headers */
+    background-color: #0057b7; /* Blue background */
+    padding: 2px 5px;
+    border-radius: 3px;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -1098,16 +1114,16 @@ audio {
     margin: 0;
     font-size: 0.9em;
     line-height: 1.4;
-    color: #ffffff;
+    color: #0057b7;
 }
 
 #logOutput {
     height: 200px;
     overflow-y: scroll;
-    background-color: #000000;
+    background-color: #ffffff;
     padding: 10px;
-    border: 1px solid #ffffff;
-    color: #ffffff;
+    border: 1px solid #0057b7;
+    color: #0057b7;
     font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
     font-size: 0.85em;
 }
@@ -1118,13 +1134,16 @@ audio {
         padding: 10px;
     }
     
-    .recorder-controls {
-        grid-template-columns: 1fr;
-        text-align: center;
+    .recording-item {
+        display: block;
     }
     
-    .recording-item {
-        grid-template-columns: 1fr;
+    .recording-info,
+    .recording-content,
+    .recording-actions {
+        display: block;
+        width: auto;
+        text-align: left;
     }
 }
 
@@ -1138,7 +1157,7 @@ audio {
     display: inline-block;
     width: 8px;
     height: 1rem;
-    background-color: #00ff00; /* Green cursor */
+    background-color: #0057b7; /* Blue cursor */
     margin-left: 4px;
     vertical-align: middle;
     animation: blink 1s infinite;
