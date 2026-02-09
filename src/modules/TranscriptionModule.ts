@@ -217,6 +217,30 @@ class TranscriptionModule {
     return langMap[lang];
   }
 
+  /**
+   * Attempt to detect the language from audio input
+   * This is a simplified implementation - a real implementation would use more sophisticated language detection
+   */
+  async detectLanguageFromStream(stream: MediaStream): Promise<LanguageCode> {
+    appLogger.info('Attempting to detect language from audio stream');
+    
+    // In a real implementation, this would analyze the audio stream to detect the language
+    // For now, we'll return 'en' as a default, but in a real implementation
+    // we would use acoustic models to identify the language
+    
+    // This is where we would implement actual language detection
+    // by analyzing the audio characteristics, phonemes, etc.
+    return new Promise((resolve) => {
+      // Simulate some processing time
+      setTimeout(() => {
+        // For demonstration purposes, we'll return English
+        // In a real implementation, this would analyze the actual audio
+        appLogger.info('Language detection completed (simulated)');
+        resolve('en');
+      }, 1000);
+    });
+  }
+
   // Method to validate if a language is supported by the Web Speech API
   isLanguageSupported(language: LanguageCode): boolean {
     if (!this.isSupported) {

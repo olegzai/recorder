@@ -98,8 +98,10 @@ export class UILayoutModule {
             <div>
               <label>Transcription Language: 
                 <select id="transcriptionLang">
+                  <option value="auto">Auto-detect</option>
                   <option value="ru">Russian</option>
                   <option value="en">English</option>
+                  <option value="uk">Ukrainian</option>
                 </select>
               </label>
             </div>

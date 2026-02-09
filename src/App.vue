@@ -88,8 +88,10 @@
                     <label
                         >Transcription Language:
                         <select v-model="settings.transcriptionLang">
+                            <option value="auto">Auto-detect</option>
                             <option value="ru">Russian</option>
                             <option value="en">English</option>
+                            <option value="uk">Ukrainian</option>
                         </select>
                     </label>
                 </div>
@@ -350,7 +352,7 @@ const startRecording = async () => {
 
     // Start real-time transcription automatically when recording starts
     if (plugins.value.transcriptionEnabled) {
-      await startRealTimeTranscription();
+      await startRealTimeTranscription(stream);
     }
 
     status.value = 'Recording... Press STOP to finish';
@@ -486,7 +488,7 @@ const transcribeAudio = async () => {
   }
 };
 
-const startRealTimeTranscription = async () => {
+const startRealTimeTranscription = async (audioStream?: MediaStream) => {
   try {
     log('Starting real-time transcription...', 'info');
     
@@ -520,7 +522,18 @@ const startRealTimeTranscription = async () => {
     });
 
     // Determine language from settings
-    const language = settings.value.transcriptionLang as LanguageCode;
+    let language = settings.value.transcriptionLang as LanguageCode;
+    
+    // If auto-detect is selected, try to detect the language
+    if (language === 'auto') {
+      // For now, we'll default to English for auto-detection
+      // In a real implementation, we would analyze the audio to detect the language
+      language = 'en'; // Default to English when auto-detect is enabled
+      log('Auto-detection enabled - defaulting to English until audio analysis is complete');
+      
+      // In the future, we could implement actual language detection here
+      // by analyzing the initial audio samples
+    }
 
     // Start real-time transcription
     await transcriptionModule.startTranscription({

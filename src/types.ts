@@ -17,7 +17,7 @@ export interface Settings {
   sampleRate: number;
   bitrate: number;
   audioFormat: string;
-  transcriptionLang: 'en' | 'ru' | 'uk' | string;
+  transcriptionLang: 'en' | 'ru' | 'uk' | 'auto' | string;
   translationLang: 'en' | 'ru' | 'uk' | string;
   retentionPeriod: string;
 }
