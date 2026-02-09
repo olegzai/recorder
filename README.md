@@ -92,6 +92,7 @@ Recorder is a lightweight, standalone sound recording solution that uses modern 
 - **Multilingual Support**: Full support for English, Ukrainian, and Russian languages throughout the application
 - **Transcription**: Ability to convert speech to text in Russian, English, and Ukrainian (fully implemented)
 - **Real-time Transcription**: Transcription starts automatically when recording begins, providing instant speech-to-text conversion (fully implemented)
+- **Auto Language Detection**: Automatically detects the language being spoken (Russian, English, Ukrainian) with enhanced recognition (improved)
 - **Translation**: Function to translate transcribed text into different languages (placeholder implementation)
 - **Comprehensive Logging**: All application processes are logged for diagnostics
 - **Typedoc Documentation**: API documentation generated with Typedoc

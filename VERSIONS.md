@@ -20,7 +20,8 @@
 - Speech transcription (Russian, English, Ukrainian) using Web Speech API
 - Real-time transcription capability that starts automatically when recording begins
 - TranscriptionModule using Web Speech API
-- Language detection for transcription
+- Enhanced language detection for Russian and Ukrainian recognition
+- Auto-detection option for transcription language
 - Manual language selection for transcription
 - Instantaneous transcription during recording
 - Continued support for English, Ukrainian, and Russian throughout the application
@@ -86,7 +87,8 @@
 - [ ] Speech transcription (Russian, English, Ukrainian)
 - [ ] Real-time transcription that starts automatically when recording begins
 - [ ] TranscriptionModule using Web Speech API
-- [ ] Language detection for transcription
+- [ ] Enhanced language detection for Russian and Ukrainian recognition
+- [ ] Auto-detection option for transcription language
 - [ ] Manual language selection for transcription
 - [ ] Instantaneous transcription during recording
 - [ ] Continued support for English, Ukrainian, and Russian throughout the application
