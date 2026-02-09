@@ -889,136 +889,264 @@ onUnmounted(async () => {
 </script>
 
 <style>
-/* Стили для приложения */
+/* Cyberpunk Terminal Styles with Swiss Grid and Japanese Minimalism */
+
+/* Base application styling */
 #app {
-    font-family: Arial, sans-serif;
-    max-width: 800px;
+    font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
+    max-width: 100%;
     margin: 0 auto;
     padding: 20px;
+    color: #00ff41; /* Cyberpunk green */
+    background-color: #0a0a0a; /* Dark background */
+    line-height: 1.6;
+    box-sizing: border-box;
 }
 
+/* Swiss grid-inspired layout */
 details {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin-bottom: 10px;
+    border: 1px solid #00ff41;
+    border-radius: 0; /* Sharp edges for cyberpunk feel */
+    margin-bottom: 15px;
     padding: 5px;
+    background-color: rgba(10, 10, 10, 0.8);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
 }
 
 summary {
-    padding: 10px;
+    padding: 12px;
     cursor: pointer;
     font-weight: bold;
-    background-color: #f0f0f0;
-    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #00ff41;
+    border-left: 3px solid #00ff41;
+    font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
+summary::marker {
+    color: #00ff41;
+}
+
+/* Panel containers with Swiss grid principles */
 .recorder-controls,
 .history-panel,
 .settings-panel,
 .plugins-panel,
 .help-panel,
-.log-panel {
+.log-panel,
+.transcription-panel {
     padding: 15px;
+    font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
 }
 
+/* Swiss grid-inspired recorder controls layout */
+.recorder-controls {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Japanese minimalism - only essential elements */
+#recordBtn {
+    justify-self: center;
+    font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 12px 24px;
+    border: 1px solid;
+    border-radius: 0;
+}
+
+#recordingTimer {
+    justify-self: center;
+    font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
+    font-weight: bold;
+    font-size: 1.4em;
+    color: #ff00ff; /* Cyberpunk pink for timer */
+    text-align: center;
+}
+
+#recorderStatus {
+    justify-self: center;
+    font-style: italic;
+    color: #00ffff; /* Cyan for status */
+}
+
+/* Cyberpunk button styling */
 button {
     padding: 8px 16px;
     margin: 5px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
+    background-color: transparent;
+    color: #00ff41;
+    border: 1px solid #00ff41;
+    border-radius: 0;
     cursor: pointer;
+    font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: rgba(0, 255, 65, 0.1);
+    box-shadow: 0 0 8px rgba(0, 255, 65, 0.4);
 }
 
 button:disabled {
-    background-color: #cccccc;
+    color: #666;
+    border-color: #666;
     cursor: not-allowed;
 }
 
+/* Specific button colors */
+#recordBtn:not(.recording-active) {
+    background-color: rgba(40, 167, 69, 0.1);
+    border-color: #28a745;
+    color: #28a745;
+}
+
+#recordBtn.recording-active {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-color: #dc3545;
+    color: #dc3545;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(220, 53, 69, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+}
+
 input,
-select {
-    padding: 5px;
+select,
+textarea {
+    padding: 8px;
     margin: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    background-color: #0a0a0a;
+    color: #00ff41;
+    border: 1px solid #00ff41;
+    border-radius: 0;
+    font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 255, 65, 0.4);
 }
 
 .recording-item {
-    border-bottom: 1px solid #eee;
-    padding: 10px 0;
+    border-bottom: 1px solid #00ff41;
+    padding: 15px 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    align-items: center;
 }
 
 .recording-info {
-    margin-bottom: 10px;
-}
-
-.recording-meta {
-    font-size: 0.9em;
-    color: #666;
-}
-
-.recording-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-audio {
-    width: 200px;
+    grid-column: 1 / -1;
 }
 
 .recording-content {
+    grid-column: 1 / -1;
     margin-top: 10px;
+}
+
+.recording-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.recording-meta {
+    font-size: 0.85em;
+    color: #00ffff; /* Cyan for metadata */
+}
+
+audio {
+    width: 100%;
+    max-width: 300px;
+    background-color: transparent;
+    border: 1px solid #00ff41;
 }
 
 .transcription-preview, .translation-preview {
     margin-top: 10px;
     padding: 10px;
-    border-left: 3px solid #42b983;
-    background-color: #f8f9fa;
+    border-left: 2px solid #ff00ff;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #00ff41;
 }
 
 .transcription-preview h4, .translation-preview h4 {
     margin: 0 0 5px 0;
     font-size: 0.9em;
-    color: #42b983;
+    color: #ff00ff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .transcription-preview p, .translation-preview p {
     margin: 0;
     font-size: 0.9em;
     line-height: 1.4;
+    color: #00ff41;
 }
 
 #logOutput {
     height: 200px;
     overflow-y: scroll;
-    background-color: #f5f5f5;
+    background-color: #000;
     padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    border: 1px solid #00ff41;
+    color: #00ff41;
+    font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
+    font-size: 0.85em;
 }
 
-#recordBtn.recording-active {
-    background-color: #dc3545;
-    border-color: #dc3545;
+/* Responsive design */
+@media (max-width: 768px) {
+    #app {
+        padding: 10px;
+    }
+    
+    .recorder-controls {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .recording-item {
+        grid-template-columns: 1fr;
+    }
 }
 
-#recordBtn.recording-active:hover {
-    background-color: #c82333;
+/* Japanese minimalism principles */
+* {
+    box-sizing: border-box;
 }
 
-.recording-timer {
-    font-family: monospace;
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #007bff;
-    margin: 10px 0;
-    text-align: center;
+/* Cyberpunk terminal cursor effect */
+.terminal-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 1rem;
+    background-color: #00ff41;
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 </style>

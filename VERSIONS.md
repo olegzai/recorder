@@ -16,7 +16,7 @@
 - Interface language switching capability
 - Light/Dark theme toggle
 
-## v0.0.2 (Real-time Transcription Features with Multilingual Support) - Planned
+## v0.0.2 (Cyberpunk Terminal Interface with Real-time Transcription) - Planned
 - Speech transcription (Russian, English, Ukrainian) using Web Speech API
 - Real-time transcription capability that starts automatically when recording begins
 - TranscriptionModule using Web Speech API
@@ -24,6 +24,11 @@
 - Auto-detection option for transcription language
 - Manual language selection for transcription
 - Instantaneous transcription during recording
+- Cyberpunk terminal-style interface with Swiss grid design principles
+- Japanese minimalism design philosophy implementation
+- Fully responsive and adaptive layout for all screen sizes
+- Optimized space utilization with clean visual hierarchy
+- Terminal-inspired aesthetic with monospace typography
 - Continued support for English, Ukrainian, and Russian throughout the application
 
 ## v0.1.0 (Translation Features with Multilingual Support) - Planned
@@ -83,7 +88,7 @@
 - [ ] Interface language switching
 - [ ] Light/Dark theme toggle
 
-## Phase 1: Real-time Transcription with Multilingual Support (Planned)
+## Phase 1: Cyberpunk Terminal Interface with Real-time Transcription (Planned)
 - [ ] Speech transcription (Russian, English, Ukrainian)
 - [ ] Real-time transcription that starts automatically when recording begins
 - [ ] TranscriptionModule using Web Speech API
@@ -91,6 +96,11 @@
 - [ ] Auto-detection option for transcription language
 - [ ] Manual language selection for transcription
 - [ ] Instantaneous transcription during recording
+- [ ] Cyberpunk terminal-style interface with Swiss grid design principles
+- [ ] Japanese minimalism design philosophy implementation
+- [ ] Fully responsive and adaptive layout for all screen sizes
+- [ ] Optimized space utilization with clean visual hierarchy
+- [ ] Terminal-inspired aesthetic with monospace typography
 - [ ] Continued support for English, Ukrainian, and Russian throughout the application
 
 ## Phase 2: Translation with Multilingual Support (Planned)

@@ -1,4 +1,4 @@
-# Recorder
+# Terminal Recorder
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](VERSIONS.md)
@@ -8,7 +8,16 @@
 
 **MADE IN UKRAINE** 🇺🇦
 
-CSS-free, pure HTML+TypeScript+JavaScript browser-based audio recorder without a server, which works entirely in the browser without any backend dependencies. Includes speech transcription and translation features. Supporting English, Ukrainian, and Russian languages.
+Cyberpunk terminal-style audio recorder with Swiss grid design principles and Japanese minimalism. Pure HTML+TypeScript+JavaScript browser-based application with a futuristic spaceship control panel aesthetic. Features responsive layout that adapts to all screen sizes with optimal space utilization.
+
+## Design Philosophy
+
+- **Cyberpunk Terminal Aesthetic**: Futuristic terminal-style interface reminiscent of spaceship control panels
+- **Swiss Grid Principles**: Precise grid layout with consistent spacing and alignment
+- **Japanese Minimalism**: Absolute minimalism with essential elements only
+- **Responsive Design**: Fully adaptive interface that works on all screen sizes
+- **Space Optimization**: Intelligent use of available space with clean visual hierarchy
+- **Terminal Experience**: Command-line inspired interface with monospace typography
 
 ## Table of Contents
 
