@@ -364,6 +364,11 @@ const startRecording = async () => {
       audioBitsPerSecond: settings.value.bitrate,
     });
 
+    // Start real-time transcription automatically when recording starts
+    if (plugins.value.transcriptionEnabled) {
+      await startRealTimeTranscription();
+    }
+
     status.value = 'Recording... Press STOP to finish';
     isRecording.value = true;
     log('Recording started');
@@ -377,6 +382,11 @@ const stopRecording = async () => {
   try {
     status.value = 'Stopping recording...';
     log('Stopping recording');
+
+    // Stop transcription if it was running
+    if (isTranscribing.value) {
+      stopTranscription();
+    }
 
     // Останавливаем запись
     const audioBlob = await audioModule.stopRecording();
